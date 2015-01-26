@@ -61,18 +61,23 @@ source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
-export PATH="$PATH:/usr/local/bin:/Users/jdivock/.rvm/gems/ruby-1.9.3-p545/bin:/Users/jdivock/.rvm/gems/ruby-1.9.3-p545@global/bin:/Users/jdivock/.rvm/rubies/ruby-1.9.3-p545/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/jdivock/.rvm/bin"
+export PATH="/usr/local/bin:$PATH:/Users/jdivock/.rvm/gems/ruby-1.9.3-p545/bin:/Users/jdivock/.rvm/gems/ruby-1.9.3-p545@global/bin:/Users/jdivock/.rvm/rubies/ruby-1.9.3-p545/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/jdivock/.rvm/bin"
 # export MANPATH="/usr/local/man:$MANPATH"
+
+# docker settings
+export DOCKER_CERT_PATH=/Users/jdivock/.boot2docker/certs/boot2docker-vm
+export DOCKER_TLS_VERIFY=1
+export DOCKER_HOST=tcp://192.168.59.103:2376
 
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
 if [[ -n $SSH_CONNECTION ]]; then
-   export EDITOR='emacs'
- else
-   export EDITOR='subl'
- fi
+	export EDITOR='emacs'
+else
+	export EDITOR='subl'
+fi
 
 # NVM stuff, to hold node 10 and 11
 export NVM_DIR=~/.nvm

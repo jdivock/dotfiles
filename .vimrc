@@ -1,35 +1,57 @@
 set nocompatible              " be iMproved, required
 filetype off                  " required
- 
+
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'gmarik/Vundle.vim'
 
-
+" Status bar
 Plugin 'bling/vim-airline'
+
+" General behavior
 Plugin 'jiangmiao/auto-pairs'
-Plugin 'tpope/vim-vinegar'
-Plugin 'scrooloose/nerdcommenter'
-Plugin 'scrooloose/nerdtree'
+Plugin 'tpope/vim-sensible'
+
+" Dear Diary
 Plugin 'glidenote/newdayone.vim'
-" Plugin 'powerline/powerline', {'rtp': 'powerline/bindings/vim/'}
+
+" Git integration
 Plugin 'tpope/vim-fugitive'
-Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
-Plugin 'kien/ctrlp.vim'
-Plugin 'mxw/vim-jsx'
-Plugin 'pangloss/vim-javascript'
+
+" Comment shortcuts
 Plugin 'tomtom/tcomment_vim'
-Plugin 'elzr/vim-json'
+
+" Markdown
 Plugin 'plasticboy/vim-markdown'
-Plugin 'flazz/vim-colorschemes'
+
+" File browsing and opening
+Plugin 'kien/ctrlp.vim'
+Plugin 'scrooloose/nerdtree'
+Plugin 'tpope/vim-vinegar'
+
+" CSS / LESS / SASS
 Plugin 'groenewege/vim-less'
-Plugin 'tpope/vim-haml'
+Plugin 'cakebaker/scss-syntax.vim'
+
+" Themes and colors
 Plugin 'ajh17/Spacegray.vim'
-Plugin 'maksimr/vim-jsbeautify'
-Plugin 'einars/js-beautify'
+Plugin 'flazz/vim-colorschemes'
+
+" JS Plugins
+Plugin 'mxw/vim-jsx'
+Plugin 'elzr/vim-json'
+Plugin 'pangloss/vim-javascript'
 Plugin 'scrooloose/syntastic'
+
+" Plugin graveyard
+" Plugin 'scrooloose/nerdcommenter'
+" Plugin 'einars/js-beautify'
+" Plugin 'powerline/powerline', {'rtp': 'powerline/bindings/vim/'}
+" Plugin 'tpope/vim-haml'
+" Plugin 'maksimr/vim-jsbeautify'
+" Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -37,17 +59,19 @@ filetype plugin indent on    " required
 
 " Theme
 colorscheme spacegray
-  
+
 " Syntastic
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
-   
+
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 let g:syntastic_javascript_checkers = ['jsxhint']
+let g:syntastic_html_tidy_exec = '/usr/local/bin/tidy'
+let g:syntastic_html_tidy_ignore_errors=['trimming empty']
 
 " Nerdtree
 " autocmd StdinReadPre * let s:std_in=1
