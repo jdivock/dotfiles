@@ -11,13 +11,18 @@ Plugin 'gmarik/Vundle.vim'
 Plugin 'bling/vim-airline'
 
 " General behavior
-Plugin 'jiangmiao/auto-pairs'
+Plugin 'vim-scripts/paredit.vim'
+" Plugin 'jiangmiao/auto-pairs'
 Plugin 'tpope/vim-sensible'
+
+" Clojure
+Plugin 'tpope/vim-fireplace'
 
 " Dear Diary
 Plugin 'glidenote/newdayone.vim'
 
 " Git integration
+Plugin 'mattn/gist-vim'
 Plugin 'tpope/vim-fugitive'
 
 " Comment shortcuts
@@ -93,6 +98,8 @@ let g:airline_theme='powerlineish'
 
 set number
 set laststatus=2
+
+let mapleader = ','
 
 " NERDTree maps
 nmap <C-k><C-b> :NERDTreeToggle<CR>

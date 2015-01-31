@@ -5,6 +5,7 @@ export ZSH=$HOME/.oh-my-zsh
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
+# Current iterm theme = ATOM
 ZSH_THEME="robbyrussell"
 
 alias aws="ssh -i ~/.ssh/aws.pem ec2-user@ec2-54-204-22-61.compute-1.amazonaws.com"
@@ -73,11 +74,21 @@ export DOCKER_HOST=tcp://192.168.59.103:2376
 # export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
-if [[ -n $SSH_CONNECTION ]]; then
-	export EDITOR='emacs'
-else
-	export EDITOR='subl'
-fi
+# if [[ -n $SSH_CONNECTION ]]; then
+# 	export EDITOR='emacs'
+# else
+# 	export EDITOR='subl'
+# fi
+export EDITOR='vim'
+bindkey -v
+
+# vi style incremental search
+bindkey '^R' history-incremental-search-backward
+bindkey '^S' history-incremental-search-forward
+bindkey '^P' history-search-backward
+bindkey '^N' history-search-forward  
+
+setopt AUTO_CD
 
 # NVM stuff, to hold node 10 and 11
 export NVM_DIR=~/.nvm

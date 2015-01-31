@@ -3,6 +3,19 @@
       package-archives )
 (push '("melpa" . "http://melpa.milkbox.net/packages/")
       package-archives)
+(add-to-list 'package-archives
+             '("melpa-stable" . "http://melpa-stable.milkbox.net/packages/"))
+(package-initialize)
+
+(defvar my-packages '(better-defaults
+                      projectile
+                      clojure-mode
+                      cider))
+
+(dolist (p my-packages)
+  (unless (package-installed-p p)
+    (package-install p)))
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -21,7 +34,6 @@
 
 (add-hook 'prog-mode-hook 'paredit-everywhere-mode)
 
-(package-initialize)
 
 ;;; yasnippet
 ;;; should be loaded before auto complete so that they can work together
@@ -43,4 +55,6 @@
 (require 'evil)
 (evil-mode 1)
 
+(add-to-list 'exec-path "/usr/local/bin")
 (load-theme 'spacegray t)
+(set-cursor-color "#fff")
