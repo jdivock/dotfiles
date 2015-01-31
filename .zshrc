@@ -101,6 +101,8 @@ source $(brew --prefix nvm)/nvm.sh
 # export SSH_KEY_PATH="~/.ssh/dsa_id"
 
 # ALIASES
+alias tmux="tmux -2"
+
 alias tree="tree -I node_modules"
 alias ep="cd ~/Projects/Sonic/EchoPark/EchoPark.Website"
 alias apeshit="cd ~/Projects/ApeShitFuckJacked"
