@@ -63,6 +63,7 @@ source $ZSH/oh-my-zsh.sh
 # User configuration
 
 export PATH="/usr/local/bin:$PATH:/Users/jdivock/.rvm/gems/ruby-1.9.3-p545/bin:/Users/jdivock/.rvm/gems/ruby-1.9.3-p545@global/bin:/Users/jdivock/.rvm/rubies/ruby-1.9.3-p545/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/jdivock/.rvm/bin"
+export PYTHONPATH="/usr/local/lib/python2.7/site-packages:$PYTHONPATH"
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # docker settings
