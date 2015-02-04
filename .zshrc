@@ -81,6 +81,7 @@ export DOCKER_HOST=tcp://192.168.59.103:2376
 # 	export EDITOR='subl'
 # fi
 export EDITOR='vim'
+export TERM=xterm-256color
 bindkey -v
 
 # vi style incremental search

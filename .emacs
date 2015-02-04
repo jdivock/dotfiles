@@ -34,7 +34,7 @@
 
 (add-hook 'prog-mode-hook 'paredit-everywhere-mode)
 
-
+(projectile-global-mode)
 ;;; yasnippet
 ;;; should be loaded before auto complete so that they can work together
 (require 'yasnippet)
@@ -56,5 +56,10 @@
 (evil-mode 1)
 
 (add-to-list 'exec-path "/usr/local/bin")
-(load-theme 'spacegray t)
-(set-cursor-color "#fff")
+(load-theme 'zenburn t)
+(set-cursor-color "#ffffff")
+
+(setq scheme-program-name
+      "/usr/local/bin/mit-scheme")
+(load-library "xscheme")
+
