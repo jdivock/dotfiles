@@ -14,6 +14,8 @@ Plugin 'bling/vim-airline'
 Plugin 'vim-scripts/paredit.vim'
 " Plugin 'jiangmiao/auto-pairs'
 Plugin 'tpope/vim-sensible'
+Plugin 'editorconfig/editorconfig-vim'
+Plugin 'Chiel92/vim-autoformat'
 
 " Clojure
 Plugin 'tpope/vim-fireplace'
