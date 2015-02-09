@@ -45,10 +45,21 @@
 ;; (add-hook 'js2-mode-hook 'esk-paredit-nonlisp) ;for emacs starter kit
 
 ;;; Set better js mode for js files
-(add-hook 'js-mode-hook 'js2-minor-mode)
+;;(add-hook 'js-mode-hook 'js2-minor-mode)
+;;(add-hook 'js2-mode-hook 'ac-js2-mode)
+(add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
 (add-hook 'js2-mode-hook 'ac-js2-mode)
-;; (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
-;; (add-hook 'js2-mode-hook 'ac-js2-mode)
+
+;; js comint - pipe commands to node repl like a boss
+(require 'js-comint)
+(setq inferior-js-program-command "/usr/local/bin/node")
+(add-hook 'js2-mode-hook '(lambda () 
+			    (local-set-key "\C-x\C-e" 'js-send-last-sexp)
+			    (local-set-key "\C-\M-x" 'js-send-last-sexp-and-go)
+			    (local-set-key "\C-cb" 'js-send-buffer)
+			    (local-set-key "\C-c\C-b" 'js-send-buffer-and-go)
+			    (local-set-key "\C-cl" 'js-load-file-and-go)
+			    ))
 
 ;; skewer js to pipe commands to browser
 (add-hook 'js2-mode-hook 'skewer-mode)
@@ -123,7 +134,7 @@
 (define-key evil-normal-state-map "\M-J" 'evil-scroll-page-down)
 ;; Fixing paste
 (define-key evil-normal-state-map "\M-v" 'evil-paste-after)
-(define-key evil-insert-state-map "\M-v" 'evil-paste-Save)
+(define-key evil-insert-state-map "\M-v" 'evil-paste-after)
 
 ;; after
 (define-key evil-normal-state-map "\M-s" 'save-buffer)
@@ -185,5 +196,6 @@
 
 
 ;;; until I figure out a better way to share installed packages
-;;;(ac-js2 skewer-mode js2-mode simple-httpd js2-mode auto-complete popup color-theme-sanityinc-tomorrow popup powerline-evil powerline evil goto-chg undo-tree skewer-mode js2-mode simple-httpd starter-kit magit git-rebase-mode git-commit-mode ido-ubiquitous smex find-file-in-project idle-highlight-mode paredit undo-tree yasnippet)
+
+;;(ac-html auto-complete popup ac-js2 skewer-mode js2-mode simple-httpd js2-mode auto-complete popup color-theme-sanityinc-tomorrow editorconfig flymake-sass flymake-easy js-comint json-mode json-snatcher json-reformat json-reformat json-snatcher jsx-mode less-css-mode multi-term popup powerline-evil powerline evil goto-chg undo-tree projectile pkg-info epl dash sass-mode haml-mode scss-mode skewer-mode js2-mode simple-httpd starter-kit magit git-rebase-mode git-commit-mode ido-ubiquitous smex find-file-in-project idle-highlight-mode paredit undo-tree wc-mode web-mode yasnippet)
 
