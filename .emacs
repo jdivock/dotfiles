@@ -17,10 +17,14 @@
 (yas-global-mode 1)
 
 (require 'auto-complete-config)
+(global-auto-complete-mode t)
 (add-to-list 'ac-dictionary-directories "~/.emacs.d/ac-dict")
 (ac-config-default)
 (ac-set-trigger-key "TAB")
 (ac-set-trigger-key "<tab>")
+
+;; PROJECTILE
+(projectile-global-mode)
 
 ;; WORD COUNT MODE
 (require 'wc-mode)
@@ -28,6 +32,14 @@
 (add-to-list 'load-path "~/.emacs.d/lisp/")
 (load "dayone")
 
+;; HTML
+(require 'web-mode)
+(add-to-list 'web-mode-ac-sources-alist
+             '("html" . (
+                         ;; attribute-value better to be first
+                         ac-source-html-attribute-value
+                         ac-source-html-tag
+                         ac-source-html-attribute)))
 ;; JAVASCRIPT
 ;; Can't get this working - Paredit for JS files
 ;; (add-hook 'js2-mode-hook 'esk-paredit-nonlisp) ;for emacs starter kit
@@ -99,6 +111,29 @@
 ;; quick pane switching
 (define-key global-map (kbd "M-[") 'previous-multiframe-window)
 (define-key global-map (kbd "M-]") 'other-window)
+
+;; Quick kill buffer
+(define-key evil-normal-state-map "\M-w" 'kill-this-buffer)
+(define-key evil-visual-state-map "\M-w" 'kill-this-buffer)
+(define-key evil-insert-state-map "\M-w" 'kill-this-buffer)
+;; Quick switch buffers
+(define-key evil-normal-state-map "\M-t" 'ido-switch-buffer)
+;; Page up/down
+(define-key evil-normal-state-map "\M-K" 'evil-scroll-page-up)
+(define-key evil-normal-state-map "\M-J" 'evil-scroll-page-down)
+;; Fixing paste
+(define-key evil-normal-state-map "\M-v" 'evil-paste-after)
+(define-key evil-insert-state-map "\M-v" 'evil-paste-Save)
+
+;; after
+(define-key evil-normal-state-map "\M-s" 'save-buffer)
+(define-key evil-insert-state-map "\M-s" 'save-buffer)
+
+;; Find Find
+(define-key evil-normal-state-map "\M-f" 'ido-find-file)
+
+;; Find File in project
+(define-key evil-normal-state-map "\M-p" 'find-file-in-project)
 
 ;; fonts
 (set-face-attribute 'default nil
