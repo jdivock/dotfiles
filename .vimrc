@@ -110,6 +110,9 @@ nmap <C-k><C-b> :NERDTreeToggle<CR>
 nmap <leader>p :CtrlP<CR>
 nmap <leader>n :CtrlPBuffer<CR>
 
+" autoformat
+noremap <F3> :Autoformat<CR><CR>
+
 syntax on
 
 if has("gui_running")
