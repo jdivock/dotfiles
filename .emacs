@@ -1,16 +1,18 @@
 (require 'package) ;; You might already have this line
 (add-to-list 'package-archives
-	                  '("melpa" . "http://melpa.org/packages/") t)
+             '("melpa" . "http://melpa.org/packages/") t)
 (add-to-list 'package-archives
-	                  '("melpa-stable" . "http://stable.melpa.org/packages/") t)
+             '("melpa-stable" . "http://stable.melpa.org/packages/") t)
 (when (< emacs-major-version 24)
-    ;; For important compatibility libraries like cl-lib
-      (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/")))
+  ;; For important compatibility libraries like cl-lib
+  (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/")))
 (package-initialize) ;; You might already have this line
 
+;; VIM MODE
 (require 'evil)
 (evil-mode 1)
 
+;; SNIPPETS
 (require 'yasnippet)
 (yas-global-mode 1)
 
@@ -20,13 +22,15 @@
 (ac-set-trigger-key "TAB")
 (ac-set-trigger-key "<tab>")
 
+;; WORD COUNT MODE
 (require 'wc-mode)
 ;; DayOne plugin
 (add-to-list 'load-path "~/.emacs.d/lisp/")
 (load "dayone")
 
-;;; Can't get this working - Paredit for JS files
-;(add-hook 'js2-mode-hook 'esk-paredit-nonlisp) ;for emacs starter kit
+;; JAVASCRIPT
+;; Can't get this working - Paredit for JS files
+;; (add-hook 'js2-mode-hook 'esk-paredit-nonlisp) ;for emacs starter kit
 
 ;;; Set better js mode for js files
 (add-hook 'js-mode-hook 'js2-minor-mode)
@@ -41,6 +45,7 @@
 
 ;; SASS
 (require 'sass-mode)
+
 (require 'scss-mode)
 (autoload 'scss-mode "scss-mode")
 (add-to-list 'auto-mode-alist '("\\.scss\\'" . scss-mode))
@@ -51,39 +56,47 @@
 
 ;; LESS
 
+;; JSX
+(require 'jsx-mode)
+(add-to-list 'auto-mode-alist '("\\.jsx\\'" . jsx-mode))
 
-;(require 'powerline)
-;(powerline-center-evil-theme)
+;; MODE BAR STYLING
+;; (require 'powerline)
+;; (powerline-center-evil-theme)
 
 ;; change mode-line color by evil state
-   (lexical-let ((default-color (cons (face-background 'mode-line)
-                                      (face-foreground 'mode-line))))
-     (add-hook 'post-command-hook
-       (lambda ()
-         (let ((color (cond ((minibufferp) default-color)
-                            ((evil-insert-state-p) '("#e80000" . "#ffffff"))
-                            ((evil-emacs-state-p)  '("#444488" . "#ffffff"))
-                            ((buffer-modified-p)   '("#006fa0" . "#ffffff"))
-                            (t default-color))))
-           (set-face-background 'mode-line (car color))
-           (set-face-foreground 'mode-line (cdr color))))))
-
-;; fix fullscreen to not be mac naitive
-(setq ns-use-native-fullscreen nil)
-;; (toggle-frame-fullscreen) ;; and start in full screen while we're at it
+(lexical-let ((default-color (cons (face-background 'mode-line)
+                                   (face-foreground 'mode-line))))
+  (add-hook 'post-command-hook
+            (lambda ()
+              (let ((color (cond ((minibufferp) default-color)
+                                 ((evil-insert-state-p) '("#e80000" . "#ffffff"))
+                                 ((evil-emacs-state-p)  '("#444488" . "#ffffff"))
+                                 ((buffer-modified-p)   '("#006fa0" . "#ffffff"))
+                                 (t default-color))))
+                (set-face-background 'mode-line (car color))
+                (set-face-foreground 'mode-line (cdr color))))))
 
 ;; term stuff
 (require 'multi-term)
 (setq multi-term-program "/bin/zsh")
 
+;; EDITORCONFIG - shit don't work
+; (require 'editorconfig)
 
-;(require 'editorconfig)
-;(load "editorconfig")
+;; GENERAL BEHAVIOR
+(setq-default truncate-lines t) ;; truncate lines by default
 
-;; remap cmd to meta
+;;; fix fullscreen to not be mac naitive
+(setq ns-use-native-fullscreen nil)
+;; (toggle-frame-fullscreen) ;; and start in full screen while we're at it
+
+;; KEY REMAPPINGS
+; remap cmd to meta
 (setq mac-option-modifier 'super)
 (setq mac-command-modifier 'meta)
 
+;; quick pane switching
 (define-key global-map (kbd "M-[") 'previous-multiframe-window)
 (define-key global-map (kbd "M-]") 'other-window)
 
@@ -91,7 +104,7 @@
 (set-face-attribute 'default nil
                     :family "Source Code Pro Medium" :height 135 :weight 'normal)
 
-;;
+;; idunno styling screen put all this shit here
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
