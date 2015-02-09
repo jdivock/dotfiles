@@ -39,6 +39,19 @@
 (add-hook 'css-mode-hook 'skewer-css-mode)
 (add-hook 'html-mode-hook 'skewer-html-mode)
 
+;; SASS
+(require 'sass-mode)
+(require 'scss-mode)
+(autoload 'scss-mode "scss-mode")
+(add-to-list 'auto-mode-alist '("\\.scss\\'" . scss-mode))
+
+(require 'flymake-sass)
+(add-hook 'sass-mode-hook 'flymake-sass-load)
+(add-hook 'scss-mode-hook 'flymake-sass-load)
+
+;; LESS
+
+
 ;(require 'powerline)
 ;(powerline-center-evil-theme)
 
