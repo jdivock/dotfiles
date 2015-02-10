@@ -53,6 +53,7 @@
 ;; js comint - pipe commands to node repl like a boss
 (require 'js-comint)
 (setq inferior-js-program-command "/usr/local/bin/node")
+(setenv "NODE_NO_READLINE" "1")
 (add-hook 'js2-mode-hook '(lambda () 
 			    (local-set-key "\C-x\C-e" 'js-send-last-sexp)
 			    (local-set-key "\C-\M-x" 'js-send-last-sexp-and-go)
@@ -62,9 +63,9 @@
 			    ))
 
 ;; skewer js to pipe commands to browser
-(add-hook 'js2-mode-hook 'skewer-mode)
-(add-hook 'css-mode-hook 'skewer-css-mode)
-(add-hook 'html-mode-hook 'skewer-html-mode)
+;; (add-hook 'js2-mode-hook 'skewer-mode)
+;; (add-hook 'css-mode-hook 'skewer-css-mode)
+;; (add-hook 'html-mode-hook 'skewer-html-mode)
 
 ;; SASS
 (require 'sass-mode)
@@ -124,32 +125,46 @@
 (define-key global-map (kbd "M-]") 'other-window)
 
 ;; Quick kill buffer
-(define-key evil-normal-state-map "\M-w" 'kill-this-buffer)
-(define-key evil-visual-state-map "\M-w" 'kill-this-buffer)
-(define-key evil-insert-state-map "\M-w" 'kill-this-buffer)
+(global-set-key "\M-w" 'kill-this-buffer)
 ;; Quick switch buffers
-(define-key evil-normal-state-map "\M-t" 'ido-switch-buffer)
+(global-set-key "\M-t" 'ido-switch-buffer)
 ;; Page up/down
-(define-key evil-normal-state-map "\M-K" 'evil-scroll-page-up)
-(define-key evil-normal-state-map "\M-J" 'evil-scroll-page-down)
+(global-set-key "\M-K" 'evil-scroll-page-up)
+(global-set-key "\M-J" 'evil-scroll-page-down)
 ;; Fixing paste
-(define-key evil-normal-state-map "\M-v" 'evil-paste-after)
-(define-key evil-insert-state-map "\M-v" 'evil-paste-after)
+(global-set-key "\M-v" 'evil-paste-after)
 
 ;; after
-(define-key evil-normal-state-map "\M-s" 'save-buffer)
-(define-key evil-insert-state-map "\M-s" 'save-buffer)
+(global-set-key "\M-s" 'save-buffer)
 
 ;; Find Find
-(define-key evil-normal-state-map "\M-f" 'ido-find-file)
+(global-set-key "\M-f" 'ido-find-file)
 
 ;; Find File in project
-(define-key evil-normal-state-map "\M-p" 'find-file-in-project)
+(global-set-key "\M-p" 'projectile-find-file)
 
 ;; fonts
 (set-face-attribute 'default nil
                     :family "Source Code Pro Medium" :height 135 :weight 'normal)
 
+;; giant wall of text that maps 'jj' to normal mode for me
+(define-key evil-insert-state-map "j" #'cofi/maybe-exit)
+
+(evil-define-command cofi/maybe-exit ()
+  :repeat change
+  (interactive)
+  (let ((modified (buffer-modified-p)))
+    (insert "j")
+    (let ((evt (read-event (format "Insert %c to exit insert state" ?j)
+               nil 0.5)))
+      (cond
+       ((null evt) (message ""))
+       ((and (integerp evt) (char-equal evt ?k))
+    (delete-char -1)
+    (set-buffer-modified-p modified)
+    (push 'escape unread-command-events))
+       (t (setq unread-command-events (append unread-command-events
+                          (list evt))))))))
 ;; idunno styling screen put all this shit here
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
