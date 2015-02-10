@@ -87,21 +87,24 @@ let g:syntastic_html_tidy_ignore_errors=['trimming empty']
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
 " Powerline config options
-"set guifont=Inconsolata\ for\ Powerline:h15
-"let g:Powerline_symbols = 'fancy'
+" set guifont=Inconsolata\ for\ Powerline:h15
+" let g:Powerline_symbols = 'fancy'
 let g:airline_powerline_fonts = 1
 set encoding=utf-8
 set t_Co=256
 set fillchars+=stl:\ ,stlnc:\
 set term=xterm-256color
 set termencoding=utf-8
-
 let g:airline_theme='powerlineish'
+
 
 set number
 set laststatus=2
 
 let mapleader = ','
+
+" Autoformat
+noremap <F3> :Autoformat<CR><CR>
 
 " NERDTree maps
 nmap <C-k><C-b> :NERDTreeToggle<CR>
@@ -110,14 +113,18 @@ nmap <C-k><C-b> :NERDTreeToggle<CR>
 nmap <leader>p :CtrlP<CR>
 nmap <leader>n :CtrlPBuffer<CR>
 
+
 " autoformat
 noremap <F3> :Autoformat<CR><CR>
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\v[\/]\(node_modules)$',
+  \ }
 
 syntax on
 
-if has("gui_running")
-	let s:uname = system("uname")
-	if s:uname == "Darwin\n"
-		set guifont=Inconsolata\ for\ Powerline:h15
-	endif
-endif
+" if has("gui_running")
+" 	let s:uname = system("uname")
+" 	if s:uname == "Darwin\n"
+" 		set guifont=Inconsolata\ for\ Powerline:h15
+" 	endif
+" endif
