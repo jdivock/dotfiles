@@ -113,6 +113,9 @@ nmap <C-k><C-b> :NERDTreeToggle<CR>
 nmap <leader>p :CtrlP<CR>
 nmap <leader>n :CtrlPBuffer<CR>
 
+
+" autoformat
+noremap <F3> :Autoformat<CR><CR>
 let g:ctrlp_custom_ignore = {
   \ 'dir':  '\v[\/]\(node_modules)$',
   \ }
