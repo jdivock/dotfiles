@@ -109,6 +109,9 @@ noremap <F3> :Autoformat<CR><CR>
 " NERDTree maps
 nmap <C-k><C-b> :NERDTreeToggle<CR>
 
+" map 'jk' to <ESC>
+imap jk <Esc>
+
 " Ctrlp maps
 nmap <leader>p :CtrlP<CR>
 nmap <leader>n :CtrlPBuffer<CR>
