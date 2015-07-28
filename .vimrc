@@ -116,6 +116,7 @@ let mapleader = ','
 noremap <F3> :Autoformat<CR><CR>
 
 " NERDTree maps
+nmap <C-n> :NERDTreeToggle<CR>
 nmap <C-k><C-b> :NERDTreeToggle<CR>
 
 " map 'jk' to <ESC>
@@ -128,11 +129,11 @@ nmap <leader>n :CtrlPBuffer<CR>
 
 " autoformat
 noremap <F3> :Autoformat<CR><CR>
-let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v[\/]\(node_modules)$',
-  \ }
 
 syntax on
+
+" BOX INDENTATION RULES
+autocmd Filetype php setlocal ts=4 sw=4 expandtab
 
 " if has("gui_running")
 " 	let s:uname = system("uname")
