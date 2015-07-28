@@ -16,12 +16,13 @@ Plugin 'vim-scripts/paredit.vim'
 Plugin 'tpope/vim-sensible'
 Plugin 'editorconfig/editorconfig-vim'
 Plugin 'Chiel92/vim-autoformat'
+Plugin 'mileszs/ack.vim'
 
 " Clojure
 Plugin 'tpope/vim-fireplace'
 
 " Dear Diary
-Plugin 'glidenote/newdayone.vim'
+" Plugin 'glidenote/newdayone.vim'
 
 " Git integration
 Plugin 'mattn/gist-vim'
@@ -67,6 +68,9 @@ filetype plugin indent on    " required
 " Theme
 colorscheme spacegray
 
+" ack
+let g:ackprg = 'ag --nogroup --nocolor --column'
+
 " Syntastic
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
@@ -79,6 +83,7 @@ let g:syntastic_check_on_wq = 0
 let g:syntastic_javascript_checkers = ['jsxhint']
 let g:syntastic_html_tidy_exec = '/usr/local/bin/tidy'
 let g:syntastic_html_tidy_ignore_errors=['trimming empty']
+let g:syntastic_mode_map = { 'passive_filetypes': ['php'] }
 
 " Nerdtree
 " autocmd StdinReadPre * let s:std_in=1
