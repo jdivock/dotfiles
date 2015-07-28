@@ -18,6 +18,10 @@ Plugin 'editorconfig/editorconfig-vim'
 Plugin 'Chiel92/vim-autoformat'
 Plugin 'mileszs/ack.vim'
 
+" Minibuffer
+Plugin 'fholgado/minibufexpl.vim'
+Plugin 'christoomey/vim-tmux-navigator'
+
 " Clojure
 Plugin 'tpope/vim-fireplace'
 
