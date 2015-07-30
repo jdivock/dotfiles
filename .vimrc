@@ -14,8 +14,8 @@ Plugin 'bling/vim-airline'
 Plugin 'vim-scripts/paredit.vim'
 " Plugin 'jiangmiao/auto-pairs'
 Plugin 'tpope/vim-sensible'
-Plugin 'editorconfig/editorconfig-vim'
-Plugin 'Chiel92/vim-autoformat'
+"Plugin 'editorconfig/editorconfig-vim'
+"Plugin 'Chiel92/vim-autoformat'
 Plugin 'mileszs/ack.vim'
 
 " Minibuffer
@@ -23,7 +23,7 @@ Plugin 'fholgado/minibufexpl.vim'
 Plugin 'christoomey/vim-tmux-navigator'
 
 " Clojure
-Plugin 'tpope/vim-fireplace'
+"Plugin 'tpope/vim-fireplace'
 
 " Dear Diary
 " Plugin 'glidenote/newdayone.vim'
@@ -52,9 +52,11 @@ Plugin 'ajh17/Spacegray.vim'
 Plugin 'flazz/vim-colorschemes'
 
 " JS Plugins
-Plugin 'mxw/vim-jsx'
+" Plugin 'mxw/vim-jsx'
 Plugin 'elzr/vim-json'
-Plugin 'pangloss/vim-javascript'
+Plugin 'jelera/vim-javascript-syntax'
+Plugin 'millermedeiros/vim-esformatter'
+"Plugin 'pangloss/vim-javascript'
 Plugin 'scrooloose/syntastic'
 
 " Plugin graveyard
@@ -84,10 +86,12 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
-let g:syntastic_javascript_checkers = ['jsxhint']
+let g:syntastic_javascript_checkers = ['eslint']
 let g:syntastic_html_tidy_exec = '/usr/local/bin/tidy'
 let g:syntastic_html_tidy_ignore_errors=['trimming empty']
 let g:syntastic_mode_map = { 'passive_filetypes': ['php'] }
+
+autocmd FileType javascript let b:syntastic_javascript_eslint_args = '--rulesdir /box/www/current/tools/js/eslint-rules'
 
 " Nerdtree
 " autocmd StdinReadPre * let s:std_in=1
@@ -117,7 +121,6 @@ noremap <F3> :Autoformat<CR><CR>
 
 " NERDTree maps
 nmap <C-n> :NERDTreeToggle<CR>
-nmap <C-k><C-b> :NERDTreeToggle<CR>
 
 " map 'jk' to <ESC>
 imap jk <Esc>
@@ -126,14 +129,42 @@ imap jk <Esc>
 nmap <leader>p :CtrlP<CR>
 nmap <leader>n :CtrlPBuffer<CR>
 
-
-" autoformat
-noremap <F3> :Autoformat<CR><CR>
+let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
+let g:ctrlp_max_files=0
 
 syntax on
 
 " BOX INDENTATION RULES
+set shiftwidth=8
+set tabstop=8
 autocmd Filetype php setlocal ts=4 sw=4 expandtab
+autocmd Filetype json setlocal ts=2 sw=2 expandtab
+"autocmd Filetype javascript setlocal noet ci pi sts=0 sw=4 ts=4
+
+" ESFORMATTER
+nnoremap <silent> <leader>es :Esformatter<CR>
+vnoremap <silent> <leader>es :EsformatterVisual<CR>
+
+" Set unknown filetypes
+au BufRead,BufNewFile .esformatter setfiletype json
+
+"autocmd FileType * set tabstop=4|set shiftwidth=4
+"set expandtab
+
+" TMUX HIT SHOW COPY PASTE SSH STUFFS
+function! PropagatePasteBufferToOSX()
+	let @n=getreg("*")
+	call system('pbcopy-remote', @n)
+	echo "done"
+endfunction
+
+function! PopulatePasteBufferFromOSX()
+	let @+ = system('pbpaste-remote')
+	echo "done"
+endfunction
+
+nnoremap <leader>6 :call PopulatePasteBufferFromOSX()<cr>
+nnoremap <leader>7 :call PropagatePasteBufferToOSX()<cr>
 
 " if has("gui_running")
 " 	let s:uname = system("uname")
