@@ -1,11 +1,13 @@
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
+set exrc
+
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 " let Vundle manage Vundle, required
-Plugin 'gmarik/Vundle.vim'
+
 
 " Status bar
 Plugin 'bling/vim-airline'
@@ -14,21 +16,11 @@ Plugin 'ervandew/supertab'
 
 " General behavior
 Plugin 'vim-scripts/paredit.vim'
-" Plugin 'jiangmiao/auto-pairs'
 Plugin 'tpope/vim-sensible'
-"Plugin 'editorconfig/editorconfig-vim'
-"Plugin 'Chiel92/vim-autoformat'
 Plugin 'mileszs/ack.vim'
 
 " Minibuffer
-" Plugin 'fholgado/minibufexpl.vim'
 Plugin 'christoomey/vim-tmux-navigator'
-
-" Clojure
-"Plugin 'tpope/vim-fireplace'
-
-" Dear Diary
-Plugin 'glidenote/newdayone.vim'
 
 " Git integration
 Plugin 'mattn/gist-vim'
@@ -54,20 +46,19 @@ Plugin 'ajh17/Spacegray.vim'
 Plugin 'flazz/vim-colorschemes'
 
 " JS Plugins
-" Plugin 'mxw/vim-jsx'
 Plugin 'elzr/vim-json'
 Plugin 'jelera/vim-javascript-syntax'
 Plugin 'millermedeiros/vim-esformatter'
-" Plugin 'pangloss/vim-javascript'
 Plugin 'scrooloose/syntastic'
 
-" Plugin graveyard
-" Plugin 'scrooloose/nerdcommenter'
-" Plugin 'einars/js-beautify'
-" Plugin 'powerline/powerline', {'rtp': 'powerline/bindings/vim/'}
-" Plugin 'tpope/vim-haml'
-" Plugin 'maksimr/vim-jsbeautify'
-" Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
+if has("unix")
+	let s:uname = system("uname -s")
+	if s:uname =~ "Darwin"
+		" Do Mac stuff here
+		" Dear Diary
+		Plugin 'glidenote/newdayone.vim'
+	endif
+endif
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -89,15 +80,10 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 let g:syntastic_javascript_checkers = ['eslint']
-" let g:syntastic_html_tidy_exec = '/usr/local/bin/tidy'
-let g:syntastic_html_tidy_ignore_errors=['trimming empty']
 let g:syntastic_mode_map = { 'passive_filetypes': ['php'] }
 
-" autocmd FileType javascript let b:syntastic_javascript_eslint_args = '--rulesdir /box/www/current/tools/js/eslint-rules'
+autocmd FileType javascript let b:syntastic_javascript_eslint_args = '--rulesdir /box/www/current/tools/js/eslint-rules'
 
-" Nerdtree
-" autocmd StdinReadPre * let s:std_in=1
-" autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
@@ -136,13 +122,6 @@ let g:ctrlp_max_files=0
 
 syntax on
 
-" BOX INDENTATION RULES
-set shiftwidth=8
-set tabstop=8
-autocmd Filetype php setlocal ts=4 sw=4 expandtab
-autocmd Filetype json setlocal ts=2 sw=2 expandtab
-"autocmd Filetype javascript setlocal noet ci pi sts=0 sw=4 ts=4
-
 " ESFORMATTER
 nnoremap <silent> <leader>es :Esformatter<CR>
 vnoremap <silent> <leader>es :EsformatterVisual<CR>
@@ -150,7 +129,4 @@ vnoremap <silent> <leader>es :EsformatterVisual<CR>
 " Set unknown filetypes
 au BufRead,BufNewFile .esformatter setfiletype json
 
-"autocmd FileType * set tabstop=4|set shiftwidth=4
-"set expandtab
-
-
+set secure
