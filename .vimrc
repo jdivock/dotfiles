@@ -58,8 +58,8 @@ Plugin 'flazz/vim-colorschemes'
 Plugin 'elzr/vim-json'
 Plugin 'jelera/vim-javascript-syntax'
 Plugin 'millermedeiros/vim-esformatter'
-"Plugin 'pangloss/vim-javascript'
-"Plugin 'scrooloose/syntastic'
+" Plugin 'pangloss/vim-javascript'
+Plugin 'scrooloose/syntastic'
 
 " Plugin graveyard
 " Plugin 'scrooloose/nerdcommenter'
@@ -89,11 +89,11 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 let g:syntastic_javascript_checkers = ['eslint']
-let g:syntastic_html_tidy_exec = '/usr/local/bin/tidy'
+" let g:syntastic_html_tidy_exec = '/usr/local/bin/tidy'
 let g:syntastic_html_tidy_ignore_errors=['trimming empty']
 let g:syntastic_mode_map = { 'passive_filetypes': ['php'] }
 
-autocmd FileType javascript let b:syntastic_javascript_eslint_args = '--rulesdir /box/www/current/tools/js/eslint-rules'
+" autocmd FileType javascript let b:syntastic_javascript_eslint_args = '--rulesdir /box/www/current/tools/js/eslint-rules'
 
 " Nerdtree
 " autocmd StdinReadPre * let s:std_in=1
