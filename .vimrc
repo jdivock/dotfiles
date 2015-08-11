@@ -10,6 +10,8 @@ Plugin 'gmarik/Vundle.vim'
 " Status bar
 Plugin 'bling/vim-airline'
 
+Plugin 'ervandew/supertab'
+
 " General behavior
 Plugin 'vim-scripts/paredit.vim'
 " Plugin 'jiangmiao/auto-pairs'
@@ -19,14 +21,14 @@ Plugin 'tpope/vim-sensible'
 Plugin 'mileszs/ack.vim'
 
 " Minibuffer
-Plugin 'fholgado/minibufexpl.vim'
+" Plugin 'fholgado/minibufexpl.vim'
 Plugin 'christoomey/vim-tmux-navigator'
 
 " Clojure
 "Plugin 'tpope/vim-fireplace'
 
 " Dear Diary
-" Plugin 'glidenote/newdayone.vim'
+Plugin 'glidenote/newdayone.vim'
 
 " Git integration
 Plugin 'mattn/gist-vim'
@@ -57,7 +59,7 @@ Plugin 'elzr/vim-json'
 Plugin 'jelera/vim-javascript-syntax'
 Plugin 'millermedeiros/vim-esformatter'
 "Plugin 'pangloss/vim-javascript'
-Plugin 'scrooloose/syntastic'
+"Plugin 'scrooloose/syntastic'
 
 " Plugin graveyard
 " Plugin 'scrooloose/nerdcommenter'
@@ -151,24 +153,4 @@ au BufRead,BufNewFile .esformatter setfiletype json
 "autocmd FileType * set tabstop=4|set shiftwidth=4
 "set expandtab
 
-" TMUX HIT SHOW COPY PASTE SSH STUFFS
-function! PropagatePasteBufferToOSX()
-	let @n=getreg("*")
-	call system('pbcopy-remote', @n)
-	echo "done"
-endfunction
 
-function! PopulatePasteBufferFromOSX()
-	let @+ = system('pbpaste-remote')
-	echo "done"
-endfunction
-
-nnoremap <leader>6 :call PopulatePasteBufferFromOSX()<cr>
-nnoremap <leader>7 :call PropagatePasteBufferToOSX()<cr>
-
-" if has("gui_running")
-" 	let s:uname = system("uname")
-" 	if s:uname == "Darwin\n"
-" 		set guifont=Inconsolata\ for\ Powerline:h15
-" 	endif
-" endif
