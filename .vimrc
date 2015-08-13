@@ -148,7 +148,7 @@ nnoremap <silent> <leader>es :Esformatter<CR>
 vnoremap <silent> <leader>es :EsformatterVisual<CR>
 
 " Set unknown filetypes
-au BufRead,BufNewFile .esformatter setfiletype json
+au BufRead,BufNewFile .esformatter,.eslintrc,.jshintrc setfiletype json
 
 "autocmd FileType * set tabstop=4|set shiftwidth=4
 "set expandtab
