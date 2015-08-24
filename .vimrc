@@ -82,7 +82,7 @@ let g:syntastic_check_on_wq = 0
 let g:syntastic_javascript_checkers = ['eslint']
 let g:syntastic_mode_map = { 'passive_filetypes': ['php'] }
 
-autocmd FileType javascript let b:syntastic_javascript_eslint_args = '--rulesdir /box/www/current/tools/js/eslint-rules'
+" autocmd FileType javascript let b:syntastic_javascript_eslint_args = '--rulesdir /box/www/current/tools/js/eslint-rules'
 
 
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
@@ -117,10 +117,33 @@ imap jk <Esc>
 nmap <leader>p :CtrlP<CR>
 nmap <leader>n :CtrlPBuffer<CR>
 
-let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
+let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
+" let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
+" let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --hidden
+"       \ --ignore .git
+"       \ --ignore .svn
+"       \ --ignore .hg
+"       \ --ignore "**/node_modules/**"
+"       \ --ignore .DS_Store
+"       \ --ignore "**/*.pyc"
+"       \ -g ""'
+"set wildignore+=*/tmp/*,**/node_modules/**,*.so,*.swp,*.zip
 let g:ctrlp_max_files=0
+let g:ctrlp_max_depth=40
 
 syntax on
+
+" Remove whitespace on save
+function! TrimWhiteSpace()
+	%s/\s\+$//e
+endfunction
+
+autocmd FileWritePre    * :call TrimWhiteSpace()
+autocmd FileAppendPre   * :call TrimWhiteSpace()
+autocmd FilterWritePre  * :call TrimWhiteSpace()
+autocmd BufWritePre     * :call TrimWhiteSpace()
+
+nnoremap <silent> <Leader>rts :call TrimWhiteSpace()<CR>
 
 " ESFORMATTER
 nnoremap <silent> <leader>es :Esformatter<CR>
@@ -128,5 +151,8 @@ vnoremap <silent> <leader>es :EsformatterVisual<CR>
 
 " Set unknown filetypes
 au BufRead,BufNewFile .esformatter setfiletype json
+au BufRead,BufNewFile .eslintrc setfiletype json
+
+autocmd Filetype json setlocal ts=2 sw=2 expandtab
 
 set secure
