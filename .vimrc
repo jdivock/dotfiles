@@ -64,6 +64,9 @@ endif
 call vundle#end()            " required
 filetype plugin indent on    " required
 
+" Indentation
+autocmd Filetype json setlocal ts=2 sw=2 expandtab
+
 " Theme
 colorscheme spacegray
 
@@ -82,6 +85,7 @@ let g:syntastic_check_on_wq = 0
 let g:syntastic_javascript_checkers = ['eslint']
 let g:syntastic_mode_map = { 'passive_filetypes': ['php'] }
 
+" TODO: FIGURE OUT HOW TO GET ME IN PROJ SPECIFIC FILE
 autocmd FileType javascript let b:syntastic_javascript_eslint_args = '--rulesdir /box/www/current/tools/js/eslint-rules'
 
 
@@ -119,6 +123,7 @@ nmap <leader>n :CtrlPBuffer<CR>
 
 let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
 let g:ctrlp_max_files=0
+
 
 syntax on
 
