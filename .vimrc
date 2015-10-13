@@ -42,6 +42,9 @@ Plugin 'tpope/vim-vinegar'
 Plugin 'groenewege/vim-less'
 Plugin 'cakebaker/scss-syntax.vim'
 
+" Scala . . . heh
+Plugin 'derekwyatt/vim-scala'
+
 " Themes and colors
 Plugin 'ajh17/Spacegray.vim'
 Plugin 'flazz/vim-colorschemes'

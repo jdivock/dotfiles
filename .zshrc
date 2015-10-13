@@ -53,10 +53,29 @@ plugins=(git osx aws brew brew-cask node nvm tmux vi-mode)
 
 # User configuration
 
-export PATH="/usr/local/bin:/usr/local/heroku/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
 # export MANPATH="/usr/local/man:$MANPATH"
+
+export NVM_DIR=~/.nvm
 source $(brew --prefix nvm)/nvm.sh
+
+export PATH="$NVM_DIR/bin;/usr/local/bin:/usr/local/heroku/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
+
 source $ZSH/oh-my-zsh.sh
+
+function setjdk() {
+if [ $# -ne 0 ]; then
+  removeFromPath '/System/Library/Frameworks/JavaVM.framework/Home/bin'
+  if [ -n "${JAVA_HOME+x}" ]; then
+    removeFromPath $JAVA_HOME
+  fi
+  export JAVA_HOME=`/usr/libexec/java_home -v $@`
+  export PATH=$JAVA_HOME/bin:$PATH
+fi
+}
+function removeFromPath() {
+export PATH=$(echo $PATH | sed -E -e "s;:$1;;" -e "s;$1:?;;")
+}
+setjdk 1.7
 
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
