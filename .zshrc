@@ -54,12 +54,6 @@ plugins=(git osx aws brew brew-cask node nvm tmux vi-mode)
 # User configuration
 
 # export MANPATH="/usr/local/man:$MANPATH"
-
-export NVM_DIR=~/.nvm
-source $(brew --prefix nvm)/nvm.sh
-
-export PATH="$NVM_DIR/bin;/usr/local/bin:/usr/local/heroku/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
-
 source $ZSH/oh-my-zsh.sh
 
 function setjdk() {
@@ -101,3 +95,6 @@ setjdk 1.7
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+
+export NVM_DIR="/usr/local/opt/nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
