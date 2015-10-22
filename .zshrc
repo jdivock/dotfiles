@@ -69,7 +69,8 @@ fi
 function removeFromPath() {
 export PATH=$(echo $PATH | sed -E -e "s;:$1;;" -e "s;$1:?;;")
 }
-setjdk 1.7
+
+# setjdk 1.7
 
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
