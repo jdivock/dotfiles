@@ -54,7 +54,6 @@ plugins=(git osx aws brew brew-cask node nvm tmux vi-mode)
 # User configuration
 
 # export MANPATH="/usr/local/man:$MANPATH"
-
 export PATH="/usr/local/bin:/usr/local/heroku/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
 
 source $ZSH/oh-my-zsh.sh
@@ -72,7 +71,7 @@ fi
 function removeFromPath() {
 export PATH=$(echo $PATH | sed -E -e "s;:$1;;" -e "s;$1:?;;")
 }
-setjdk 1.7
+# setjdk 1.7
 
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
@@ -99,5 +98,5 @@ setjdk 1.7
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-export NVM_DIR="/Users/jdivock/.nvm"
+export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
