@@ -89,6 +89,7 @@ let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 let g:syntastic_javascript_checkers = ['eslint']
 let g:syntastic_mode_map = { 'passive_filetypes': ['php'] }
+let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute " ]
 
 " autocmd FileType javascript let b:syntastic_javascript_eslint_args = '--rulesdir /box/www/current/tools/js/eslint-rules'
 
@@ -123,8 +124,8 @@ set tabstop=2
 set expandtab
 
 " Auto indent pasted text
-nnoremap p p=`]<C-o>
-nnoremap P P=`]<C-o>
+" nnoremap p p=`]<C-o>
+" nnoremap P P=`]<C-o>
 
 filetype plugin on
 filetype indent on
@@ -203,7 +204,7 @@ vnoremap <silent> <leader>es :EsformatterVisual<CR>
 " Set unknown filetypes
 au BufRead,BufNewFile .esformatter setfiletype json
 au BufRead,BufNewFile .jshintrc setfiletype json
-au BufRead,BufNewFile .eslintrc setfiletype json
+au BufRead,BufNewFile .eslintrc setfiletype yaml
 
 autocmd Filetype json setlocal ts=2 sw=2 expandtab
 
