@@ -34,10 +34,9 @@ Plug 'justinj/vim-react-snippets', { 'for': 'javascript' }
 " ES6 Snippets
 Plug 'isRuslan/vim-es6', { 'for': 'javascript' }
 
-" Minibuffer
 Plug 'christoomey/vim-tmux-navigator'
 
-Plugin 'blueyed/smarty.vim'
+Plug 'blueyed/smarty.vim'
 
 " Git integration
 Plug 'mattn/gist-vim'
