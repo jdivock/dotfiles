@@ -20,6 +20,18 @@ Plugin 'vim-scripts/paredit.vim'
 Plugin 'tpope/vim-sensible'
 Plugin 'mileszs/ack.vim'
 
+" VimSurround
+Plugin 'tpope/vim-surround'
+
+" SnipMate
+Plugin 'MarcWeber/vim-addon-mw-utils'
+Plugin 'tomtom/tlib_vim'
+Plugin 'garbas/vim-snipmate'
+Plugin 'honza/vim-snippets'
+"to prevent clash with youcompleteme, change snippet trigger
+imap <C-J> <esc>a<Plug>snipMateNextOrTrigger
+smap <C-J> <Plug>snipMateNextOrTrigger
+
 " Minibuffer
 Plugin 'christoomey/vim-tmux-navigator'
 
@@ -33,6 +45,9 @@ Plugin 'tomtom/tcomment_vim'
 " Markdown
 Plugin 'godlygeek/tabular'
 Plugin 'plasticboy/vim-markdown'
+
+" Workflowy
+Plugin 'lukaszkorecki/workflowish'
 
 " File browsing and opening
 Plugin 'kien/ctrlp.vim'
@@ -55,6 +70,14 @@ Plugin 'elzr/vim-json'
 Plugin 'jelera/vim-javascript-syntax'
 Plugin 'millermedeiros/vim-esformatter'
 Plugin 'scrooloose/syntastic'
+
+" TERN
+Plugin 'ternjs/tern_for_vim'
+let g:tern_map_keys=1
+let g:tern_map_prefix = '<leader>'
+
+" YouCompleteMe
+Plugin 'Valloric/YouCompleteMe'
 
 if has("unix")
 	let s:uname = system("uname -s")
