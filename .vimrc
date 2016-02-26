@@ -1,7 +1,6 @@
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
-set exrc
 
 " set the runtime path to include Vundle and initialize
 call plug#begin('~/.vim/plugged')
@@ -37,6 +36,8 @@ Plug 'isRuslan/vim-es6', { 'for': 'javascript' }
 
 " Minibuffer
 Plug 'christoomey/vim-tmux-navigator'
+
+Plugin 'blueyed/smarty.vim'
 
 " Git integration
 Plug 'mattn/gist-vim'
@@ -226,5 +227,7 @@ au BufRead,BufNewFile .jshintrc setfiletype json
 au BufRead,BufNewFile .eslintrc setfiletype yaml
 
 autocmd Filetype json setlocal ts=2 sw=2 expandtab
+autocmd Filetype yaml setlocal ts=2 sw=2 expandtab
 
 set secure
+set exrc
