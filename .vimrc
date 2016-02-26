@@ -4,99 +4,95 @@ filetype off                  " required
 set exrc
 
 " set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-" let Vundle manage Vundle, required
-
+call plug#begin('~/.vim/plugged')
 
 " Status bar
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 
-Plugin 'ervandew/supertab'
+Plug 'ervandew/supertab'
 
 " General behavior
-Plugin 'vim-scripts/paredit.vim'
-Plugin 'tpope/vim-sensible'
-Plugin 'mileszs/ack.vim'
+Plug 'vim-scripts/paredit.vim'
+Plug 'tpope/vim-sensible'
+Plug 'mileszs/ack.vim', { 'on': 'Ack' }
 
 " VimSurround
-Plugin 'tpope/vim-surround'
+Plug 'tpope/vim-surround'
 
 " SnipMate
-Plugin 'MarcWeber/vim-addon-mw-utils'
-Plugin 'tomtom/tlib_vim'
-Plugin 'garbas/vim-snipmate'
-Plugin 'honza/vim-snippets'
+Plug 'MarcWeber/vim-addon-mw-utils'
+Plug 'tomtom/tlib_vim'
+Plug 'garbas/vim-snipmate'
+Plug 'honza/vim-snippets'
 " to prevent clash with youcompleteme, change snippet trigger
 imap <C-J> <esc>a<Plug>snipMateNextOrTrigger
 smap <C-J> <Plug>snipMateNextOrTrigger
 
 " React snippets
-Plugin 'justinj/vim-react-snippets'
+Plug 'justinj/vim-react-snippets', { 'for': 'javascript' }
 
 " ES6 Snippets
-Plugin 'isRuslan/vim-es6'
+Plug 'isRuslan/vim-es6', { 'for': 'javascript' }
 
 " Minibuffer
-Plugin 'christoomey/vim-tmux-navigator'
+Plug 'christoomey/vim-tmux-navigator'
 
 " Git integration
-Plugin 'mattn/gist-vim'
-Plugin 'tpope/vim-fugitive'
+Plug 'mattn/gist-vim'
+Plug 'tpope/vim-fugitive'
 
 " Comment shortcuts
-Plugin 'tomtom/tcomment_vim'
+Plug 'tomtom/tcomment_vim'
 
 " Markdown
-Plugin 'godlygeek/tabular'
-Plugin 'plasticboy/vim-markdown'
+Plug 'godlygeek/tabular'
+Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
 
 " Workflowy
-Plugin 'lukaszkorecki/workflowish'
+Plug 'lukaszkorecki/workflowish', { 'for': 'wofl' }
 
 " File browsing and opening
-Plugin 'kien/ctrlp.vim'
-Plugin 'scrooloose/nerdtree'
-Plugin 'tpope/vim-vinegar'
+Plug 'kien/ctrlp.vim'
+Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+Plug 'tpope/vim-vinegar'
 
 " CSS / LESS / SASS
-Plugin 'groenewege/vim-less'
-Plugin 'cakebaker/scss-syntax.vim'
+Plug 'groenewege/vim-less', { 'for': 'less' }
+Plug 'cakebaker/scss-syntax.vim', { 'for': 'scss' }
 
 " Scala . . . heh
-Plugin 'derekwyatt/vim-scala'
+Plug 'derekwyatt/vim-scala', {'for': 'scala' }
 
 " Themes and colors
-Plugin 'ajh17/Spacegray.vim'
-Plugin 'flazz/vim-colorschemes'
+Plug 'ajh17/Spacegray.vim'
+Plug 'flazz/vim-colorschemes'
 
 " JS Plugins
-Plugin 'elzr/vim-json'
-Plugin 'jelera/vim-javascript-syntax'
-Plugin 'millermedeiros/vim-esformatter'
-Plugin 'scrooloose/syntastic'
+Plug 'elzr/vim-json', { 'for': 'json' }
+Plug 'jelera/vim-javascript-syntax', { 'for': 'javascript' }
+Plug 'scrooloose/syntastic'
 
 " TERN
-Plugin 'ternjs/tern_for_vim'
+Plug 'ternjs/tern_for_vim'
 let g:tern_map_keys=1
 let g:tern_map_prefix = '<leader>'
 
 " YouCompleteMe
-Plugin 'Valloric/YouCompleteMe'
+Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
 
+" DayOne
 if has("unix")
 	let s:uname = system("uname -s")
 	if s:uname =~ "Darwin"
 		" Do Mac stuff here
 		" Dear Diary
-		Plugin 'glidenote/newdayone.vim'
+		Plug 'glidenote/newdayone.vim'
 	endif
 endif
 
-" All of your Plugins must be added before the following line
-call vundle#end()            " required
-filetype plugin indent on    " required
+" Add plugins to &runtimepath
+call plug#end()
 
 " Indentation
 autocmd Filetype json setlocal ts=2 sw=2 expandtab
@@ -124,7 +120,6 @@ let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute " ]
 
 " autocmd FileType javascript let b:syntastic_javascript_eslint_args = '--rulesdir /box/www/current/tools/js/eslint-rules'
 
-
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
 " Powerline config options
@@ -137,7 +132,6 @@ set fillchars+=stl:\ ,stlnc:\
 set term=xterm-256color
 set termencoding=utf-8
 let g:airline_theme='powerlineish'
-
 
 set number
 set laststatus=2
@@ -213,7 +207,6 @@ let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
 let g:ctrlp_max_files=0
 let g:ctrlp_max_depth=40
 
-
 syntax on
 
 " Remove whitespace on save
@@ -228,12 +221,7 @@ autocmd BufWritePre     * :call TrimWhiteSpace()
 
 nnoremap <silent> <Leader>rts :call TrimWhiteSpace()<CR>
 
-" ESFORMATTER
-nnoremap <silent> <leader>es :Esformatter<CR>
-vnoremap <silent> <leader>es :EsformatterVisual<CR>
-
 " Set unknown filetypes
-au BufRead,BufNewFile .esformatter setfiletype json
 au BufRead,BufNewFile .jshintrc setfiletype json
 au BufRead,BufNewFile .eslintrc setfiletype yaml
 
