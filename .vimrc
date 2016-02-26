@@ -28,9 +28,15 @@ Plugin 'MarcWeber/vim-addon-mw-utils'
 Plugin 'tomtom/tlib_vim'
 Plugin 'garbas/vim-snipmate'
 Plugin 'honza/vim-snippets'
-"to prevent clash with youcompleteme, change snippet trigger
+" to prevent clash with youcompleteme, change snippet trigger
 imap <C-J> <esc>a<Plug>snipMateNextOrTrigger
 smap <C-J> <Plug>snipMateNextOrTrigger
+
+" React snippets
+Plugin 'justinj/vim-react-snippets'
+
+" ES6 Snippets
+Plugin 'isRuslan/vim-es6'
 
 " Minibuffer
 Plugin 'christoomey/vim-tmux-navigator'
