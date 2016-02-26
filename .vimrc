@@ -74,7 +74,7 @@ Plug 'jelera/vim-javascript-syntax', { 'for': 'javascript' }
 Plug 'scrooloose/syntastic'
 
 " TERN
-Plug 'ternjs/tern_for_vim'
+Plug 'ternjs/tern_for_vim', { 'do': 'npm install' }
 let g:tern_map_keys=1
 let g:tern_map_prefix = '<leader>'
 
