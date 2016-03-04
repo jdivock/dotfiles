@@ -9,8 +9,13 @@ ZSH_THEME="pure"
 
 plugins=(git osx aws brew brew-cask node nvm npm tmux vi-mode)
 
+
 # User configuration
 export PATH="./node_modules/.bin:/usr/local/bin:/usr/local/heroku/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
+
+if [[ -a "$HOME/.boxrc" ]]; then
+  source $HOME/.boxrc
+fi
 
 source $ZSH/oh-my-zsh.sh
 
@@ -25,7 +30,7 @@ if [ $# -ne 0 ]; then
 fi
 }
 function removeFromPath() {
-export PATH=$(echo $PATH | sed -E -e "s;:$1;;" -e "s;$1:?;;")
+  export PATH=$(echo $PATH | sed -E -e "s;:$1;;" -e "s;$1:?;;")
 }
 # setjdk 1.7
 
