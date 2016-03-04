@@ -7,7 +7,7 @@ export ZSH=$HOME/.oh-my-zsh
 # time that oh-my-zsh is loaded.
 ZSH_THEME="pure"
 
-plugins=(git osx aws brew brew-cask node nvm tmux vi-mode)
+plugins=(git osx aws brew brew-cask node nvm npm tmux vi-mode)
 
 # User configuration
 export PATH="./node_modules/.bin:/usr/local/bin:/usr/local/heroku/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
