@@ -79,7 +79,7 @@ let g:tern_map_keys=1
 let g:tern_map_prefix = '<leader>'
 
 " YouCompleteMe
-Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
+Plug 'Valloric/YouCompleteMe', { 'do': './install.py --tern-completer' }
 
 " DayOne
 if has("unix")
