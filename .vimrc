@@ -226,6 +226,8 @@ nnoremap <silent> <Leader>rts :call TrimWhiteSpace()<CR>
 au BufRead,BufNewFile .jshintrc setfiletype json
 au BufRead,BufNewFile .eslintrc setfiletype yaml
 
+au BufWritePost * redraw!
+
 autocmd Filetype json setlocal ts=2 sw=2 expandtab
 autocmd Filetype yaml setlocal ts=2 sw=2 expandtab
 
