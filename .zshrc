@@ -7,7 +7,7 @@ export ZSH=$HOME/.oh-my-zsh
 # time that oh-my-zsh is loaded.
 ZSH_THEME="pure"
 
-plugins=(aws git git-extras osx docker brew brew-cask node nvm npm tmux vi-mode)
+plugins=(jsontools aws git git-extras osx docker brew brew-cask node nvm npm tmux vi-mode)
 
 
 # User configuration
