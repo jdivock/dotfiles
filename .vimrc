@@ -34,9 +34,15 @@ Plug 'justinj/vim-react-snippets', { 'for': 'javascript' }
 " ES6 Snippets
 Plug 'isRuslan/vim-es6', { 'for': 'javascript' }
 
+" Tmux integration
 Plug 'christoomey/vim-tmux-navigator'
+Plug 'tmux-plugins/vim-tmux-focus-events'
 
+" Smarty
 Plug 'blueyed/smarty.vim'
+
+" Handlebars
+Plug 'mustache/vim-mustache-handlebars', { 'for': 'html.handlebars' }
 
 " Git integration
 Plug 'mattn/gist-vim'
@@ -48,9 +54,6 @@ Plug 'tomtom/tcomment_vim'
 " Markdown
 Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
-
-" Workflowy
-Plug 'lukaszkorecki/workflowish', { 'for': 'wofl' }
 
 " File browsing and opening
 Plug 'kien/ctrlp.vim'
@@ -67,6 +70,8 @@ Plug 'derekwyatt/vim-scala', {'for': 'scala' }
 " Themes and colors
 Plug 'ajh17/Spacegray.vim'
 Plug 'flazz/vim-colorschemes'
+
+Plug 'jiangmiao/auto-pairs'
 
 " JS Plugins
 Plug 'elzr/vim-json', { 'for': 'json' }
@@ -100,6 +105,9 @@ autocmd Filetype json setlocal ts=2 sw=2 expandtab
 " Theme
 colorscheme spacegray
 
+" recording macros is not my thing
+map q <Nop>
+
 " ack
 let g:ackprg = 'ag --nogroup --nocolor --column'
 
@@ -124,8 +132,6 @@ let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute " ]
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
 " Powerline config options
-" set guifont=Inconsolata\ for\ Powerline:h15
-" let g:Powerline_symbols = 'fancy'
 let g:airline_powerline_fonts = 1
 set encoding=utf-8
 set t_Co=256
@@ -139,6 +145,11 @@ set laststatus=2
 
 let mapleader = ','
 
+" Copy to osx clipboard
+vnoremap <C-c> "*y<CR>
+vnoremap y "*y<CR>
+nnoremap Y "*Y<CR>
+
 " ================ Indentation ======================
 
 set autoindent
@@ -150,8 +161,8 @@ set tabstop=2
 set expandtab
 
 " Auto indent pasted text
-" nnoremap p p=`]<C-o>
-" nnoremap P P=`]<C-o>
+nnoremap p p=`]<C-o>
+nnoremap P P=`]<C-o>
 
 filetype plugin on
 filetype indent on
@@ -192,7 +203,7 @@ set ignorecase      " Ignore case when searching...
 set smartcase       " ...unless we type a capital
 
 " Autoformat
-noremap <F3> :Autoformat<CR><CR>
+noremap <leader>f :Autoformat<CR>
 
 " NERDTree maps
 nmap <C-n> :NERDTreeToggle<CR>
