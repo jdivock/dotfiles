@@ -17,6 +17,7 @@ if [[ -a "$HOME/.boxrc" ]]; then
   source $HOME/.boxrc
 fi
 
+source ~/.bin/tmuxinator.zsh
 source $ZSH/oh-my-zsh.sh
 
 function setjdk() {
