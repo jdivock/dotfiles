@@ -28,7 +28,7 @@ imap <C-k>     <Plug>(neosnippet_expand_or_jump)
 smap <C-k>     <Plug>(neosnippet_expand_or_jump)
 xmap <C-k>     <Plug>(neosnippet_expand_target)
 " Tell Neosnippet about the other snippets
-let g:neosnippet#snippets_directory='~/.nvim/plugged/vim-snippets, ~/.nvim/plugged/vim-react-snippets, ~/.nvim/pluggin/vim-es6'
+let g:neosnippet#snippets_directory='~/.nvim/plugged/vim-snippets, ~/.nvim/plugged/vim-react-snippets, ~/.nvim/pluggin/vim-es6 ~/.nvim/plugged/neosnippet-snippets'
 " SuperTab like snippets behavior.
 imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
 \ "\<Plug>(neosnippet_expand_or_jump)"
