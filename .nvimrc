@@ -111,10 +111,10 @@ Plug 'jiangmiao/auto-pairs'
 
 " JS Plugins
 Plug 'elzr/vim-json', { 'for': 'json' }
-" Plug 'jelera/vim-javascript-syntax', { 'for': 'javascript' }
-Plug 'othree/javascript-libraries-syntax.vim'
-Plug 'othree/yajs.vim'
-Plug 'othree/es.next.syntax.vim'
+Plug 'othree/javascript-libraries-syntax.vim', { 'for': 'javascript' }
+Plug 'othree/yajs.vim', { 'for': 'javascript' }
+Plug 'othree/jsdoc-syntax.vim', { 'for': 'javascript' }
+Plug 'othree/es.next.syntax.vim', { 'for': 'javascript' }
 
 Plug 'benekastah/neomake'
 let g:neomake_javascript_enabled_makers = ['eslint']
