@@ -1,5 +1,5 @@
 " set the runtime path to include Vundle and initialize
-call plug#begin('~/.vim/plugged')
+call plug#begin('~/.nvim/plugged')
 
 " Status bar
 Plug 'vim-airline/vim-airline'
