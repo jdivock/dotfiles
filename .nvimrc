@@ -1,15 +1,9 @@
-set nocompatible              " be iMproved, required
-filetype off                  " required
-
-
 " set the runtime path to include Vundle and initialize
 call plug#begin('~/.vim/plugged')
 
 " Status bar
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-
-Plug 'ervandew/supertab'
 
 " General behavior
 Plug 'vim-scripts/paredit.vim'
@@ -23,10 +17,10 @@ Plug 'tpope/vim-surround'
 Plug 'Shougo/neosnippet.vim'
 Plug 'Shougo/neosnippet-snippets'
 Plug 'honza/vim-snippets'
-" Plug 'MarcWeber/vim-addon-mw-utils'
-" Plug 'tomtom/tlib_vim'
-" Plug 'garbas/vim-snipmate'
-" Snipppets -----------------------------------------------------------------{{{
+" React snippets
+Plug 'justinj/vim-react-snippets', { 'for': 'javascript' }
+" ES6 Snippets
+Plug 'isRuslan/vim-es6', { 'for': 'javascript' }
 
 " Enable snipMate compatibility feature.
 let g:neosnippet#enable_snipmate_compatibility = 1
@@ -34,8 +28,7 @@ imap <C-k>     <Plug>(neosnippet_expand_or_jump)
 smap <C-k>     <Plug>(neosnippet_expand_or_jump)
 xmap <C-k>     <Plug>(neosnippet_expand_target)
 " Tell Neosnippet about the other snippets
-let g:neosnippet#snippets_directory='~/.nvim/plugged/vim-snippets/snippets, ~/.nvim/plugged/vim-react-snippets/snippets'
-
+let g:neosnippet#snippets_directory='~/.nvim/plugged/vim-snippets, ~/.nvim/plugged/vim-react-snippets, ~/.nvim/pluggin/vim-es6'
 " SuperTab like snippets behavior.
 imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
 \ "\<Plug>(neosnippet_expand_or_jump)"
@@ -44,8 +37,6 @@ smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
 \ "\<Plug>(neosnippet_expand_or_jump)"
 \: "\<TAB>"
 
-"}}}
-
 " Neoplete
 function! DoRemote(arg)
   UpdateRemotePlugins
@@ -53,13 +44,24 @@ endfunction
 Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
 " Use deoplete.
 let g:deoplete#enable_at_startup = 1
+if !exists('g:deoplete#omni#input_patterns')
+  let g:deoplete#omni#input_patterns = {}
+endif
+" let g:deoplete#disable_auto_complete = 1
+autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
+" <TAB>: completion.
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+" tern
+autocmd FileType javascript nnoremap <silent> <buffer> gb :TernDef<CR>
+
+" Enable omni completion.
+autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+
 Plug 'carlitux/deoplete-ternjs'
-
-" React snippets
-Plug 'justinj/vim-react-snippets', { 'for': 'javascript' }
-
-" ES6 Snippets
-Plug 'isRuslan/vim-es6', { 'for': 'javascript' }
 
 " Tmux integration
 Plug 'christoomey/vim-tmux-navigator'
@@ -89,11 +91,12 @@ Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
 
 " File browsing and opening
-Plug 'kien/ctrlp.vim'
+Plug 'ctrlpvim/ctrlp.vim'
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'tpope/vim-vinegar'
 
 " CSS / LESS / SASS
+Plug 'ap/vim-css-color'
 Plug 'groenewege/vim-less', { 'for': 'less' }
 Plug 'cakebaker/scss-syntax.vim', { 'for': 'scss' }
 
@@ -110,6 +113,8 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'elzr/vim-json', { 'for': 'json' }
 " Plug 'jelera/vim-javascript-syntax', { 'for': 'javascript' }
 Plug 'othree/javascript-libraries-syntax.vim'
+Plug 'othree/yajs.vim'
+Plug 'othree/es.next.syntax.vim'
 
 Plug 'benekastah/neomake'
 let g:neomake_javascript_enabled_makers = ['eslint']
@@ -145,23 +150,9 @@ map q <Nop>
 " ack
 let g:ackprg = 'ag --nogroup --nocolor --column'
 
-" Syntastic
-" set statusline+=%#warningmsg#
-" set statusline+=%{SyntasticStatuslineFlag()}
-" set statusline+=%*
-
-" let g:syntastic_always_populate_loc_list = 1
-" let g:syntastic_enable_signs = 1
-" let g:syntastic_auto_jump = 0
-" let g:syntastic_auto_loc_list = 1
-" let g:syntastic_check_on_open = 1
-" let g:syntastic_check_on_wq = 0
-" let g:syntastic_scss_checkers = ['scss_lint']
-" let g:syntastic_javascript_checkers = ['eslint']
-" let g:syntastic_mode_map = { 'passive_filetypes': ['php'] }
-" let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute " ]
-
-" autocmd FileType javascript let b:syntastic_javascript_eslint_args = '--rulesdir /box/www/current/tools/js/eslint-rules'
+let g:jsx_ext_required = 0
+" recording macros is not my thing
+map q <Nop>
 
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
@@ -206,13 +197,11 @@ set list listchars=tab:\ \ ,trail:·
 set nowrap       "Don't wrap lines
 set linebreak    "Wrap lines at convenient points
 
-" OLD INDENTATION
-" set tabstop=2 softtabstop=2 shiftwidth=2 noexpandtab
-
 " ================ Turn Off Swap Files ==============
 
 set noswapfile
 set nobackup
+set noshowmode
 set nowb
 
 " ================ Folds ============================
@@ -220,7 +209,6 @@ set nowb
 set foldmethod=indent   "fold based on indent
 set foldnestmax=3       "deepest fold is 3 levels
 set nofoldenable        "dont fold by default
-
 
 " ================ Scrolling ========================
 
