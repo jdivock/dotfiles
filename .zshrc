@@ -38,7 +38,9 @@ function removeFromPath() {
 export EDITOR='vim';
 
 # whoaa maybe not quite yet
-# alias nvim='vim';
+alias vim='nvim';
+alias python='python3';
+alias python-config='python3-config';
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
