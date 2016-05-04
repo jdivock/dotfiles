@@ -26,6 +26,25 @@ Plug 'honza/vim-snippets'
 " Plug 'MarcWeber/vim-addon-mw-utils'
 " Plug 'tomtom/tlib_vim'
 " Plug 'garbas/vim-snipmate'
+" Snipppets -----------------------------------------------------------------{{{
+
+" Enable snipMate compatibility feature.
+let g:neosnippet#enable_snipmate_compatibility = 1
+imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+xmap <C-k>     <Plug>(neosnippet_expand_target)
+" Tell Neosnippet about the other snippets
+let g:neosnippet#snippets_directory='~/.nvim/plugged/vim-snippets/snippets, ~/.nvim/plugged/vim-react-snippets/snippets'
+
+" SuperTab like snippets behavior.
+imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+\ "\<Plug>(neosnippet_expand_or_jump)"
+\: pumvisible() ? "\<C-n>" : "\<TAB>"
+smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+\ "\<Plug>(neosnippet_expand_or_jump)"
+\: "\<TAB>"
+
+"}}}
 
 " Neoplete
 function! DoRemote(arg)
@@ -35,9 +54,6 @@ Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
 " Use deoplete.
 let g:deoplete#enable_at_startup = 1
 Plug 'carlitux/deoplete-ternjs'
-
-imap <C-J> <esc>a<Plug>snipMateNextOrTrigger
-smap <C-J> <Plug>snipMateNextOrTrigger
 
 " React snippets
 Plug 'justinj/vim-react-snippets', { 'for': 'javascript' }
@@ -92,7 +108,8 @@ Plug 'jiangmiao/auto-pairs'
 
 " JS Plugins
 Plug 'elzr/vim-json', { 'for': 'json' }
-Plug 'jelera/vim-javascript-syntax', { 'for': 'javascript' }
+" Plug 'jelera/vim-javascript-syntax', { 'for': 'javascript' }
+Plug 'othree/javascript-libraries-syntax.vim'
 
 Plug 'benekastah/neomake'
 let g:neomake_javascript_enabled_makers = ['eslint']
