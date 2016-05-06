@@ -31,11 +31,11 @@ xmap <C-k>     <Plug>(neosnippet_expand_target)
 let g:neosnippet#snippets_directory='~/.nvim/plugged/vim-snippets, ~/.nvim/plugged/vim-react-snippets, ~/.nvim/pluggin/vim-es6 ~/.nvim/plugged/neosnippet-snippets'
 " SuperTab like snippets behavior.
 imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-\ "\<Plug>(neosnippet_expand_or_jump)"
-\: pumvisible() ? "\<C-n>" : "\<TAB>"
+      \ "\<Plug>(neosnippet_expand_or_jump)"
+      \: pumvisible() ? "\<C-n>" : "\<TAB>"
 smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-\ "\<Plug>(neosnippet_expand_or_jump)"
-\: "\<TAB>"
+      \ "\<Plug>(neosnippet_expand_or_jump)"
+      \: "\<TAB>"
 
 " Neoplete
 function! DoRemote(arg)
@@ -107,6 +107,7 @@ Plug 'derekwyatt/vim-scala', {'for': 'scala' }
 Plug 'ajh17/Spacegray.vim'
 Plug 'flazz/vim-colorschemes'
 
+
 Plug 'jiangmiao/auto-pairs'
 
 " JS Plugins
@@ -117,6 +118,7 @@ Plug 'othree/jsdoc-syntax.vim', { 'for': 'javascript' }
 Plug 'othree/es.next.syntax.vim', { 'for': 'javascript' }
 
 Plug 'benekastah/neomake'
+
 let g:neomake_javascript_enabled_makers = ['eslint']
 autocmd! BufWritePost * Neomake
 
@@ -127,13 +129,16 @@ let g:tern_map_prefix = '<leader>'
 
 " DayOne
 if has("unix")
-	let s:uname = system("uname -s")
-	if s:uname =~ "Darwin"
-		" Do Mac stuff here
-		" Dear Diary
-		Plug 'glidenote/newdayone.vim'
-	endif
+  let s:uname = system("uname -s")
+  if s:uname =~ "Darwin"
+    " Do Mac stuff here
+    " Dear Diary
+    Plug 'glidenote/newdayone.vim'
+  endif
 endif
+
+" Icons
+Plug 'ryanoasis/vim-devicons'
 
 " Add plugins to &runtimepath
 call plug#end()
@@ -244,7 +249,7 @@ syntax on
 
 " Remove whitespace on save
 function! TrimWhiteSpace()
-	%s/\s\+$//e
+  %s/\s\+$//e
 endfunction
 
 autocmd FileWritePre    * :call TrimWhiteSpace()
