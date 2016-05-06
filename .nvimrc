@@ -1,26 +1,64 @@
 " set the runtime path to include Vundle and initialize
 call plug#begin('~/.nvim/plugged')
 
-" Status bar
+function! DoRemote(arg)
+  UpdateRemotePlugins
+endfunction
+
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-
-" General behavior
 Plug 'vim-scripts/paredit.vim'
 Plug 'tpope/vim-sensible'
 Plug 'mileszs/ack.vim', { 'on': 'Ack' }
-
-" VimSurround
 Plug 'tpope/vim-surround'
-
-" SnipMate
 Plug 'Shougo/neosnippet.vim'
 Plug 'Shougo/neosnippet-snippets'
 Plug 'honza/vim-snippets'
-" React snippets
 Plug 'justinj/vim-react-snippets', { 'for': 'javascript' }
-" ES6 Snippets
 Plug 'isRuslan/vim-es6', { 'for': 'javascript' }
+Plug 'blueyed/smarty.vim'
+Plug 'mustache/vim-mustache-handlebars', { 'for': 'html.handlebars' }
+Plug 'mattn/gist-vim'
+Plug 'tpope/vim-fugitive'
+Plug 'tomtom/tcomment_vim'
+Plug 'godlygeek/tabular'
+Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+Plug 'tpope/vim-vinegar'
+Plug 'ap/vim-css-color'
+Plug 'groenewege/vim-less', { 'for': 'less' }
+Plug 'cakebaker/scss-syntax.vim', { 'for': 'scss' }
+Plug 'derekwyatt/vim-scala', {'for': 'scala' }
+Plug 'ajh17/Spacegray.vim'
+Plug 'flazz/vim-colorschemes'
+Plug 'jiangmiao/auto-pairs'
+Plug 'elzr/vim-json', { 'for': 'json' }
+Plug 'othree/javascript-libraries-syntax.vim', { 'for': 'javascript' }
+Plug 'othree/yajs.vim', { 'for': 'javascript' }
+Plug 'othree/jsdoc-syntax.vim', { 'for': 'javascript' }
+Plug 'othree/es.next.syntax.vim', { 'for': 'javascript' }
+Plug 'benekastah/neomake'
+Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
+Plug 'carlitux/deoplete-ternjs'
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'tmux-plugins/vim-tmux'
+Plug 'tmux-plugins/vim-tmux-focus-events'
+Plug 'ternjs/tern_for_vim', { 'do': 'npm install' }
+Plug 'ryanoasis/vim-devicons'
+
+" DayOne
+if has("unix")
+  let s:uname = system("uname -s")
+  if s:uname =~ "Darwin"
+    " Do Mac stuff here
+    " Dear Diary
+    Plug 'glidenote/newdayone.vim'
+  endif
+endif
+
+" Add plugins to &runtimepath
+call plug#end()
 
 " Enable snipMate compatibility feature.
 let g:neosnippet#enable_snipmate_compatibility = 1
@@ -37,11 +75,6 @@ smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
       \ "\<Plug>(neosnippet_expand_or_jump)"
       \: "\<TAB>"
 
-" Neoplete
-function! DoRemote(arg)
-  UpdateRemotePlugins
-endfunction
-Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
 " Use deoplete.
 let g:deoplete#enable_at_startup = 1
 if !exists('g:deoplete#omni#input_patterns')
@@ -61,87 +94,18 @@ autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
 autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 
-Plug 'carlitux/deoplete-ternjs'
-
-" Tmux integration
-Plug 'christoomey/vim-tmux-navigator'
-Plug 'tmux-plugins/vim-tmux'
-Plug 'tmux-plugins/vim-tmux-focus-events'
-
 " Stupid mac
 if has('nvim')
   nmap <BS> <C-W>h
 endif
 
-" Smarty
-Plug 'blueyed/smarty.vim'
-
-" Handlebars
-Plug 'mustache/vim-mustache-handlebars', { 'for': 'html.handlebars' }
-
-" Git integration
-Plug 'mattn/gist-vim'
-Plug 'tpope/vim-fugitive'
-
-" Comment shortcuts
-Plug 'tomtom/tcomment_vim'
-
-" Markdown
-Plug 'godlygeek/tabular'
-Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
-
-" File browsing and opening
-Plug 'ctrlpvim/ctrlp.vim'
-Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
-Plug 'tpope/vim-vinegar'
-
-" CSS / LESS / SASS
-Plug 'ap/vim-css-color'
-Plug 'groenewege/vim-less', { 'for': 'less' }
-Plug 'cakebaker/scss-syntax.vim', { 'for': 'scss' }
-
-" Scala . . . heh
-Plug 'derekwyatt/vim-scala', {'for': 'scala' }
-
-" Themes and colors
-Plug 'ajh17/Spacegray.vim'
-Plug 'flazz/vim-colorschemes'
-
-
-Plug 'jiangmiao/auto-pairs'
-
-" JS Plugins
-Plug 'elzr/vim-json', { 'for': 'json' }
-Plug 'othree/javascript-libraries-syntax.vim', { 'for': 'javascript' }
-Plug 'othree/yajs.vim', { 'for': 'javascript' }
-Plug 'othree/jsdoc-syntax.vim', { 'for': 'javascript' }
-Plug 'othree/es.next.syntax.vim', { 'for': 'javascript' }
-
-Plug 'benekastah/neomake'
-
+" Linting
 let g:neomake_javascript_enabled_makers = ['eslint']
 autocmd! BufWritePost * Neomake
 
 " TERN
-Plug 'ternjs/tern_for_vim', { 'do': 'npm install' }
 let g:tern_map_keys=1
 let g:tern_map_prefix = '<leader>'
-
-" DayOne
-if has("unix")
-  let s:uname = system("uname -s")
-  if s:uname =~ "Darwin"
-    " Do Mac stuff here
-    " Dear Diary
-    Plug 'glidenote/newdayone.vim'
-  endif
-endif
-
-" Icons
-Plug 'ryanoasis/vim-devicons'
-
-" Add plugins to &runtimepath
-call plug#end()
 
 " Indentation
 autocmd Filetype json setlocal ts=2 sw=2 expandtab
