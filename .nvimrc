@@ -5,47 +5,49 @@ function! DoRemote(arg)
   UpdateRemotePlugins
 endfunction
 
+Plug 'Chiel92/vim-autoformat'
+Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
+Plug 'Shougo/neosnippet-snippets'
+Plug 'Shougo/neosnippet.vim'
+Plug 'ajh17/Spacegray.vim'
+Plug 'ap/vim-css-color'
+Plug 'benekastah/neomake'
+Plug 'blueyed/smarty.vim'
+Plug 'cakebaker/scss-syntax.vim', { 'for': 'scss' }
+Plug 'carlitux/deoplete-ternjs'
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'derekwyatt/vim-scala', {'for': 'scala' }
+Plug 'editorconfig/editorconfig-vim'
+Plug 'elzr/vim-json', { 'for': 'json' }
+Plug 'flazz/vim-colorschemes'
+Plug 'godlygeek/tabular'
+Plug 'groenewege/vim-less', { 'for': 'less' }
+Plug 'honza/vim-snippets'
+Plug 'isRuslan/vim-es6', { 'for': 'javascript' }
+Plug 'jiangmiao/auto-pairs'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+Plug 'justinj/vim-react-snippets', { 'for': 'javascript' }
+Plug 'mattn/gist-vim'
+Plug 'mileszs/ack.vim', { 'on': 'Ack' }
+Plug 'mustache/vim-mustache-handlebars', { 'for': 'html.handlebars' }
+Plug 'othree/es.next.syntax.vim', { 'for': 'javascript' }
+Plug 'othree/javascript-libraries-syntax.vim', { 'for': 'javascript' }
+Plug 'othree/jsdoc-syntax.vim', { 'for': 'javascript' }
+Plug 'othree/yajs.vim', { 'for': 'javascript' }
+Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
+Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+Plug 'ternjs/tern_for_vim', { 'do': 'npm install' }
+Plug 'tmux-plugins/vim-tmux'
+Plug 'tmux-plugins/vim-tmux-focus-events'
+Plug 'tomtom/tcomment_vim'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-sensible'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-vinegar'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-scripts/paredit.vim'
-Plug 'tpope/vim-sensible'
-Plug 'mileszs/ack.vim', { 'on': 'Ack' }
-Plug 'tpope/vim-surround'
-Plug 'Shougo/neosnippet.vim'
-Plug 'Shougo/neosnippet-snippets'
-Plug 'honza/vim-snippets'
-Plug 'justinj/vim-react-snippets', { 'for': 'javascript' }
-Plug 'isRuslan/vim-es6', { 'for': 'javascript' }
-Plug 'blueyed/smarty.vim'
-Plug 'mustache/vim-mustache-handlebars', { 'for': 'html.handlebars' }
-Plug 'mattn/gist-vim'
-Plug 'tpope/vim-fugitive'
-Plug 'tomtom/tcomment_vim'
-Plug 'godlygeek/tabular'
-Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
-Plug 'ctrlpvim/ctrlp.vim'
-Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
-Plug 'tpope/vim-vinegar'
-Plug 'ap/vim-css-color'
-Plug 'groenewege/vim-less', { 'for': 'less' }
-Plug 'cakebaker/scss-syntax.vim', { 'for': 'scss' }
-Plug 'derekwyatt/vim-scala', {'for': 'scala' }
-Plug 'ajh17/Spacegray.vim'
-Plug 'flazz/vim-colorschemes'
-Plug 'jiangmiao/auto-pairs'
-Plug 'elzr/vim-json', { 'for': 'json' }
-Plug 'othree/javascript-libraries-syntax.vim', { 'for': 'javascript' }
-Plug 'othree/yajs.vim', { 'for': 'javascript' }
-Plug 'othree/jsdoc-syntax.vim', { 'for': 'javascript' }
-Plug 'othree/es.next.syntax.vim', { 'for': 'javascript' }
-Plug 'benekastah/neomake'
-Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
-Plug 'carlitux/deoplete-ternjs'
-Plug 'christoomey/vim-tmux-navigator'
-Plug 'tmux-plugins/vim-tmux'
-Plug 'tmux-plugins/vim-tmux-focus-events'
-Plug 'ternjs/tern_for_vim', { 'do': 'npm install' }
-Plug 'ryanoasis/vim-devicons'
 
 " DayOne
 if has("unix")
@@ -56,6 +58,8 @@ if has("unix")
     Plug 'glidenote/newdayone.vim'
   endif
 endif
+
+Plug 'ryanoasis/vim-devicons'
 
 " Add plugins to &runtimepath
 call plug#end()
@@ -109,6 +113,7 @@ let g:tern_map_prefix = '<leader>'
 
 " Indentation
 autocmd Filetype json setlocal ts=2 sw=2 expandtab
+autocmd Filetype yaml setlocal ts=2 sw=2 expandtab
 
 " Theme
 colorscheme spacegray
@@ -160,6 +165,9 @@ nnoremap P P=`]<C-o>
 filetype plugin on
 filetype indent on
 
+" map 'jk' to <ESC>
+imap jk <Esc>
+
 " Display tabs and trailing spaces visually
 set list listchars=tab:\ \ ,trail:·
 
@@ -198,16 +206,19 @@ noremap <leader>f :Autoformat<CR>
 " NERDTree maps
 nmap <C-n> :NERDTreeToggle<CR>
 
-" map 'jk' to <ESC>
-imap jk <Esc>
+" FZF
+nmap <C-p> :GitFiles<CR>
+nmap <leader>n :Buffers<CR>
 
-" Ctrlp maps
-nmap <leader>p :CtrlP<CR>
-nmap <leader>n :CtrlPBuffer<CR>
+function! s:fzf_statusline()
+  " Override statusline as you like
+  highlight fzf1 ctermfg=161 ctermbg=251
+  highlight fzf2 ctermfg=23 ctermbg=251
+  highlight fzf3 ctermfg=237 ctermbg=251
+  setlocal statusline=%#fzf1#\ >\ %#fzf2#fz%#fzf3#f
+endfunction
 
-let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
-let g:ctrlp_max_files=0
-let g:ctrlp_max_depth=40
+autocmd! User FzfStatusLine call <SID>fzf_statusline()
 
 syntax on
 
@@ -229,8 +240,6 @@ au BufRead,BufNewFile .eslintrc setfiletype yaml
 
 au BufWritePost * redraw!
 
-autocmd Filetype json setlocal ts=2 sw=2 expandtab
-autocmd Filetype yaml setlocal ts=2 sw=2 expandtab
 
 set secure
 set exrc
