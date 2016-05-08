@@ -11,7 +11,8 @@ plugins=(jsontools aws git git-extras osx docker brew brew-cask node nvm npm tmu
 
 
 # User configuration
-export PATH="./node_modules/.bin:/usr/local/bin:/usr/local/heroku/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
+export GOPATH=$HOME/golang
+export PATH="$GOPATH/bin:/usr/local/opt/go/libexec/bin:./node_modules/.bin:/usr/local/bin:/usr/local/heroku/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
 
 if [[ -a "$HOME/.boxrc" ]]; then
   source $HOME/.boxrc
