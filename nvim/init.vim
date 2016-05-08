@@ -203,6 +203,15 @@ set smartcase       " ...unless we type a capital
 " Autoformat
 noremap <leader>f :Autoformat<CR>
 
+" Wrap toggle
+nnoremap <Leader>wr :set wrap! wrap?<CR>
+
+" Quick spelling fix
+nnoremap <Leader>fs 1z=
+
+" Open neovim config
+nnoremap <Leader>rc :e $HOME/.config/nvim/init.vim<CR>
+
 " NERDTree maps
 nmap <C-n> :NERDTreeToggle<CR>
 
