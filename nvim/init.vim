@@ -104,7 +104,6 @@ if has('nvim')
   nmap <BS> <C-W>h
 endif
 
-" Linting
 let g:neomake_javascript_enabled_makers = ['eslint']
 autocmd! BufWritePost * Neomake
 
@@ -128,6 +127,16 @@ let g:ackprg = 'ag --nogroup --nocolor --column'
 let g:jsx_ext_required = 0
 " recording macros is not my thing
 map q <Nop>
+
+function! s:fzf_statusline()
+  " Override statusline as you like
+  highlight fzf1 ctermfg=161 ctermbg=251
+  highlight fzf2 ctermfg=23 ctermbg=251
+  highlight fzf3 ctermfg=237 ctermbg=251
+  setlocal statusline=%#fzf1#\ >\ %#fzf2#fz%#fzf3#f
+endfunction
+
+autocmd! User FzfStatusLine call <SID>fzf_statusline()
 
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
@@ -168,6 +177,7 @@ filetype indent on
 
 " map 'jk' to <ESC>
 imap jk <Esc>
+let g:used_javascript_libs = 'react,underscore'
 
 " Display tabs and trailing spaces visually
 set list listchars=tab:\ \ ,trail:·
