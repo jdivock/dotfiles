@@ -105,7 +105,7 @@ if has('nvim')
 endif
 
 let g:neomake_javascript_enabled_makers = ['eslint']
-autocmd! BufWritePost * Neomake
+autocmd! BufWritePost,BufEnter * Neomake
 
 " TERN
 let g:tern_map_keys=1
