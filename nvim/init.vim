@@ -29,6 +29,7 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'justinj/vim-react-snippets', { 'for': 'javascript' }
+Plug 'lambdatoast/elm.vim', { 'for': 'elm' }
 Plug 'mattn/gist-vim'
 Plug 'mileszs/ack.vim', { 'on': 'Ack' }
 Plug 'mustache/vim-mustache-handlebars', { 'for': 'html.handlebars' }
