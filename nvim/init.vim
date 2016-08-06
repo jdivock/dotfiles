@@ -52,14 +52,14 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-scripts/paredit.vim'
 
 " DayOne
-if has("unix")
-  let s:uname = system("uname -s")
-  if s:uname =~ "Darwin"
-    " Do Mac stuff here
-    " Dear Diary
-    Plug 'glidenote/newdayone.vim'
-  endif
-endif
+" if has("unix")
+"   let s:uname = system("uname -s")
+"   if s:uname =~ "Darwin"
+"     " Do Mac stuff here
+"     " Dear Diary
+"     Plug 'glidenote/newdayone.vim'
+"   endif
+" endif
 
 Plug 'ryanoasis/vim-devicons'
 
