@@ -5,6 +5,8 @@ function! DoRemote(arg)
   UpdateRemotePlugins
 endfunction
 
+Plug 'moll/vim-node'
+Plug 'airblade/vim-gitgutter'
 Plug 'Chiel92/vim-autoformat'
 Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
 Plug 'Shougo/neosnippet-snippets'
