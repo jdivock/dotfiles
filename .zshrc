@@ -1,3 +1,4 @@
+
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
 
@@ -12,7 +13,7 @@ plugins=(jsontools aws git git-extras osx docker brew brew-cask node nvm npm tmu
 
 # User configuration
 export GOPATH=$HOME/golang
-export PATH="$GOPATH/bin:/usr/local/opt/go/libexec/bin:./node_modules/.bin:/usr/local/bin:/usr/local/heroku/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
+export PATH="$GOPATH/bin:/usr/local/opt/go/libexec/bin:./node_modules/.bin:/usr/local/bin:/usr/local/heroku/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$HOME/bin"
 
 if [[ -a "$HOME/.boxrc" ]]; then
   source $HOME/.boxrc
@@ -35,12 +36,17 @@ function removeFromPath() {
 }
 # setjdk 1.7
 
+# Python stuffs
+# eval "$(pyenv init -)"
+# eval "$(pyenv virtualenv-init -)"
+
 export EDITOR='vim';
 
 # whoaa maybe not quite yet
 alias vim='nvim';
-alias python='python3';
-alias python-config='python3-config';
+alias zoltar='cd ~/Uber/zoltar';
+# alias python='python3';
+# alias python-config='python3-config';
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
@@ -48,5 +54,4 @@ export NVM_DIR="$HOME/.nvm"
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+export PATH="$HOME/.rvm/bin:/usr/local/sbin:$PATH"

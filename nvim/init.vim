@@ -11,9 +11,10 @@ Plug 'Chiel92/vim-autoformat'
 Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
 Plug 'Shougo/neosnippet-snippets'
 Plug 'Shougo/neosnippet.vim'
+Plug 'airblade/vim-gitgutter'
 Plug 'ajh17/Spacegray.vim'
 Plug 'ap/vim-css-color'
-Plug 'benekastah/neomake'
+Plug 'arakashic/chromatica.nvim'
 Plug 'blueyed/smarty.vim'
 Plug 'cakebaker/scss-syntax.vim', { 'for': 'scss' }
 Plug 'carlitux/deoplete-ternjs'
@@ -28,13 +29,16 @@ Plug 'groenewege/vim-less', { 'for': 'less' }
 Plug 'honza/vim-snippets'
 Plug 'isRuslan/vim-es6', { 'for': 'javascript' }
 Plug 'jiangmiao/auto-pairs'
+Plug 'jreybert/vimagit'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'justinj/vim-react-snippets', { 'for': 'javascript' }
 Plug 'lambdatoast/elm.vim', { 'for': 'elm' }
 Plug 'mattn/gist-vim'
 Plug 'mileszs/ack.vim', { 'on': 'Ack' }
+Plug 'moll/vim-node'
 Plug 'mustache/vim-mustache-handlebars', { 'for': 'html.handlebars' }
+Plug 'neomake/neomake'
 Plug 'othree/es.next.syntax.vim', { 'for': 'javascript' }
 Plug 'othree/javascript-libraries-syntax.vim', { 'for': 'javascript' }
 Plug 'othree/jsdoc-syntax.vim', { 'for': 'javascript' }
@@ -95,6 +99,9 @@ inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 " tern
 autocmd FileType javascript nnoremap <silent> <buffer> gb :TernDef<CR>
 
+let g:chromatica#enable_at_startup=1
+let g:chromatica#libclang_path='/usr/local/opt/llvm/lib'
+
 " Enable omni completion.
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
 autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
@@ -107,7 +114,7 @@ if has('nvim')
   nmap <BS> <C-W>h
 endif
 
-let g:neomake_javascript_enabled_makers = ['eslint']
+let g:neomake_javascript_enabled_makers = ['flow', 'eslint']
 autocmd! BufWritePost,BufEnter * Neomake
 
 " TERN
