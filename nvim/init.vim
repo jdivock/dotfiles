@@ -7,6 +7,7 @@ endfunction
 
 Plug 'Chiel92/vim-autoformat'
 Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
+Plug 'zchee/deoplete-go', { 'do': 'make'}
 Plug 'Shougo/neosnippet-snippets'
 Plug 'Shougo/neosnippet.vim'
 Plug 'SirVer/ultisnips'
@@ -87,10 +88,6 @@ call plug#end()
 " smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
 "       \ "\<Plug>(neosnippet_expand_or_jump)"
 "       \: "\<TAB>"
-
-
-let g:python_host_prog = '/Users/jdivock/.pyenv/versions/neovim2/bin/python'
-let g:python3_host_prog = '/Users/jdivock/.pyenv/versions/neovim3/bin/python'
 
 " Use deoplete.
 let g:deoplete#enable_at_startup = 1
