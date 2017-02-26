@@ -88,6 +88,10 @@ call plug#end()
 "       \ "\<Plug>(neosnippet_expand_or_jump)"
 "       \: "\<TAB>"
 
+
+let g:python_host_prog = '/Users/jdivock/.pyenv/versions/neovim2/bin/python'
+let g:python3_host_prog = '/Users/jdivock/.pyenv/versions/neovim3/bin/python'
+
 " Use deoplete.
 let g:deoplete#enable_at_startup = 1
 if !exists('g:deoplete#omni#input_patterns')
