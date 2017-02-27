@@ -1,3 +1,6 @@
+if [[ -a "$HOME/.uberrc" ]]; then
+  source $HOME/.uberrc
+fi
 
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
@@ -15,9 +18,6 @@ plugins=(jsontools aws git git-extras osx docker brew brew-cask node nvm npm tmu
 export GOPATH=$HOME/golang
 export PATH="$GOPATH/bin:/usr/local/opt/go/libexec/bin:./node_modules/.bin:/usr/local/bin:/usr/local/heroku/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$HOME/bin"
 
-if [[ -a "$HOME/.boxrc" ]]; then
-  source $HOME/.boxrc
-fi
 
 source $ZSH/oh-my-zsh.sh
 
