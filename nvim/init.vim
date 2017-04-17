@@ -6,6 +6,10 @@ function! DoRemote(arg)
 endfunction
 
 Plug 'Chiel92/vim-autoformat'
+Plug 'fsharp/vim-fsharp', {
+      \ 'for': 'fsharp',
+      \ 'do':  'make fsautocomplete',
+      \}
 Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
 Plug 'zchee/deoplete-go', { 'do': 'make'}
 Plug 'Shougo/neosnippet-snippets'
