@@ -130,6 +130,7 @@ if has('nvim')
 endif
 
 let g:neomake_javascript_enabled_makers = ['flow', 'eslint']
+let g:neomake_go_gometalinter_args = ['--disable-all', '--enable=gosimple', '--enable=staticcheck', '--enable=unused']
 autocmd! BufWritePost,BufEnter * Neomake
 
 " TERN
