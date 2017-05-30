@@ -151,7 +151,7 @@ map q <Nop>
 " ack
 let g:ackprg = 'ag --nogroup --nocolor --column'
 
-let g:jsx_ext_required = 0
+" let g:jsx_ext_required = 0
 " recording macros is not my thing
 map q <Nop>
 
@@ -278,6 +278,8 @@ autocmd FileWritePre    * :call TrimWhiteSpace()
 autocmd FileAppendPre   * :call TrimWhiteSpace()
 autocmd FilterWritePre  * :call TrimWhiteSpace()
 autocmd BufWritePre     * :call TrimWhiteSpace()
+
+autocmd BufNewFile,BufRead *.txt set wrap
 
 nnoremap <silent> <Leader>rts :call TrimWhiteSpace()<CR>
 
