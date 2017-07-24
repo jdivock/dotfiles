@@ -34,6 +34,7 @@ Plug 'godlygeek/tabular'
 Plug 'groenewege/vim-less', { 'for': 'less' }
 Plug 'honza/vim-snippets'
 Plug 'isRuslan/vim-es6', { 'for': ['javascript', 'javascript.jsx'] }
+Plug 'vim-ruby/vim-ruby'
 Plug 'jiangmiao/auto-pairs'
 Plug 'jreybert/vimagit'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
