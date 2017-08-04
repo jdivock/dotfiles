@@ -18,10 +18,12 @@ Plug 'SirVer/ultisnips'
 Plug 'airblade/vim-gitgutter'
 Plug 'ajh17/Spacegray.vim'
 Plug 'ap/vim-css-color'
+Plug 'kchmck/vim-coffee-script'
+Plug 'AndrewRadev/vim-eco'
 Plug 'arakashic/chromatica.nvim'
 Plug 'blueyed/smarty.vim'
 Plug 'cakebaker/scss-syntax.vim', { 'for': 'scss' }
-Plug 'carlitux/deoplete-ternjs'
+Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'derekwyatt/vim-scala', {'for': 'scala' }
 Plug 'editorconfig/editorconfig-vim'
@@ -31,21 +33,21 @@ Plug 'flazz/vim-colorschemes'
 Plug 'godlygeek/tabular'
 Plug 'groenewege/vim-less', { 'for': 'less' }
 Plug 'honza/vim-snippets'
-Plug 'isRuslan/vim-es6', { 'for': 'javascript' }
+Plug 'isRuslan/vim-es6', { 'for': ['javascript', 'javascript.jsx'] }
 Plug 'jiangmiao/auto-pairs'
 Plug 'jreybert/vimagit'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-Plug 'justinj/vim-react-snippets', { 'for': 'javascript' }
+Plug 'justinj/vim-react-snippets', { 'for': ['javascript', 'javascript.jsx'] }
 Plug 'lambdatoast/elm.vim', { 'for': 'elm' }
 Plug 'mattn/gist-vim'
 Plug 'mileszs/ack.vim', { 'on': 'Ack' }
 Plug 'moll/vim-node'
 Plug 'mustache/vim-mustache-handlebars', { 'for': 'html.handlebars' }
 Plug 'neomake/neomake'
-Plug 'othree/es.next.syntax.vim', { 'for': 'javascript' }
-Plug 'othree/javascript-libraries-syntax.vim', { 'for': 'javascript' }
-Plug 'othree/jsdoc-syntax.vim', { 'for': 'javascript' }
+Plug 'othree/es.next.syntax.vim', { 'for': ['javascript', 'javascript.jsx'] }
+Plug 'othree/javascript-libraries-syntax.vim', { 'for': ['javascript', 'javascript.jsx'] }
+Plug 'othree/jsdoc-syntax.vim', { 'for': ['javascript', 'javascript.jsx'] }
 Plug 'othree/jspc.vim', { 'for': ['javascript', 'javascript.jsx'] }
 Plug 'othree/yajs.vim', { 'for': ['javascript', 'javascript.jsx'] }
 Plug 'mxw/vim-jsx', { 'for': ['javascript', 'javascript.jsx'] }
@@ -100,6 +102,7 @@ set completeopt+=noselect
 " inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 " tern
 autocmd FileType javascript nnoremap <silent> <buffer> gb :TernDef<CR>
+autocmd FileType javascript.jsx nnoremap <silent> <buffer> gb :TernDef<CR>
 
 let g:chromatica#enable_at_startup=1
 let g:chromatica#libclang_path='/usr/local/opt/llvm/lib'
@@ -116,12 +119,17 @@ let g:deoplete#omni#functions.javascript = [
   \ 'tern#Complete',
   \ 'jspc#omni'
 \]
+let g:deoplete#omni#functions['javascript.jsx'] = [
+  \ 'tern#Complete',
+  \ 'jspc#omni'
+\]
 
 set completeopt=longest,menuone,preview
 let g:deoplete#sources = {}
 let g:deoplete#sources['javascript.jsx'] = ['file', 'ultisnips', 'ternjs']
 
 autocmd FileType javascript let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
+autocmd FileType javascript.jsx let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
 let g:UltiSnipsExpandTrigger="<C-j>"
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 
@@ -135,8 +143,14 @@ let g:neomake_go_gometalinter_args = ['--disable-all', '--enable=gosimple', '--e
 autocmd! BufWritePost,BufEnter * Neomake
 
 " TERN
+let g:tern#command = ["tern"]
+let g:tern#arguments = ["--persistent"]
 let g:tern_map_keys=1
 let g:tern_map_prefix = '<leader>'
+let g:tern#filetypes = [
+  \ 'jsx',
+  \ 'javascript.jsx',
+\ ]
 
 " Indentation
 autocmd Filetype json setlocal ts=2 sw=2 expandtab

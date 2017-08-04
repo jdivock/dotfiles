@@ -1,5 +1,5 @@
-if [[ -a "$HOME/.uberrc" ]]; then
-  source $HOME/.uberrc
+if [[ -a "$HOME/.privaterc" ]]; then
+  source $HOME/.privaterc
 fi
 
 # Path to your oh-my-zsh installation.
@@ -13,11 +13,9 @@ ZSH_THEME="refined"
 
 plugins=(jsontools aws git git-extras osx docker brew brew-cask node nvm npm tmux vi-mode)
 
-
 # User configuration
 export GOPATH=$HOME/golang
 export PATH="./node_modules/.bin:$GOPATH/bin:/usr/local/opt/go/libexec/bin:/usr/local/bin:/usr/local/heroku/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$HOME/bin:$PATH"
-
 
 source $ZSH/oh-my-zsh.sh
 
@@ -42,11 +40,7 @@ function removeFromPath() {
 
 export EDITOR='vim';
 
-# whoaa maybe not quite yet
 alias vim='nvim';
-alias zoltar='cd ~/Uber/zoltar';
-# alias python='python3';
-# alias python-config='python3-config';
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
@@ -73,7 +67,10 @@ load-nvmrc() {
 add-zsh-hook chpwd load-nvmrc
 load-nvmrc
 
+eval "$(rbenv init -)"
+
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export PATH="$HOME/.rvm/bin:/usr/local/sbin:$PATH"
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
