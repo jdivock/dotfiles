@@ -17,16 +17,14 @@ Plug 'arakashic/chromatica.nvim'
 Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
 Plug 'blueyed/smarty.vim'
 Plug 'cakebaker/scss-syntax.vim', { 'for': 'scss' }
+Plug 'calebeby/ncm-css'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'derekwyatt/vim-scala', {'for': 'scala' }
 Plug 'editorconfig/editorconfig-vim'
 Plug 'elzr/vim-json', { 'for': 'json' }
 Plug 'fatih/vim-go'
 Plug 'flazz/vim-colorschemes'
-Plug 'fsharp/vim-fsharp', {
-      \ 'for': 'fsharp',
-      \ 'do':  'make fsautocomplete',
-      \}
+Plug 'fsharp/vim-fsharp', {'for': 'fsharp', 'do':  'make fsautocomplete'}
 Plug 'godlygeek/tabular'
 Plug 'groenewege/vim-less', { 'for': 'less' }
 Plug 'honza/vim-snippets'
@@ -38,6 +36,7 @@ Plug 'junegunn/fzf.vim'
 Plug 'justinj/vim-react-snippets', { 'for': ['javascript', 'javascript.jsx'] }
 Plug 'kchmck/vim-coffee-script'
 Plug 'lambdatoast/elm.vim', { 'for': 'elm' }
+Plug 'majutsushi/tagbar'
 Plug 'mattn/gist-vim'
 Plug 'mileszs/ack.vim', { 'on': 'Ack' }
 Plug 'moll/vim-node'
@@ -51,6 +50,8 @@ Plug 'othree/jspc.vim', { 'for': ['javascript', 'javascript.jsx'] }
 Plug 'othree/yajs.vim', { 'for': ['javascript', 'javascript.jsx'] }
 Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
 Plug 'roxma/LanguageServer-php-neovim',  {'do': 'composer install && composer run-script parse-stubs'}
+Plug 'roxma/ncm-flow'
+Plug 'roxma/ncm-rct-complete'
 Plug 'roxma/nvim-cm-tern',  {'do': 'npm install'}
 Plug 'roxma/nvim-completion-manager'
 Plug 'roxma/python-support.nvim'
@@ -117,6 +118,7 @@ let g:python_support_python3_requirements = add(get(g:,'python_support_python3_r
 let g:python_support_python3_requirements = add(get(g:,'python_support_python3_requirements',[]),'mistune')
 let g:python_support_python3_requirements = add(get(g:,'python_support_python3_requirements',[]),'psutil')
 let g:python_support_python3_requirements = add(get(g:,'python_support_python3_requirements',[]),'setproctitle')
+
 
 autocmd FileType php LanguageClientStart
 
@@ -223,13 +225,18 @@ set smartcase       " ...unless we type a capital
 noremap <leader>f :Autoformat<CR>
 
 " Wrap toggle
-nnoremap <Leader>wr :set wrap! wrap?<CR>
+nnoremap <leader>wr :set wrap! wrap?<CR>
 
 " Quick spelling fix
-nnoremap <Leader>fs 1z=
+nnoremap <leader>fs 1z=
 
 " Open neovim config
-nnoremap <Leader>rc :e $HOME/.config/nvim/init.vim<CR>
+nnoremap <leader>rc :e $HOME/.config/nvim/init.vim<CR>
+
+" Generate ctags
+nnoremap <leader>dc :!ctags -R --languages=-javascript --exclude=.git --exclude=log --exclude=target --fields=+ialS --extra=+q .<CR>
+" Generate ctags with ripper-tags, specifically for Ruby
+nnoremap <leader>dr :!ripper-tags -R --force<CR>
 
 " NERDTree maps
 nmap <C-n> :NERDTreeToggle<CR>
