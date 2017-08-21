@@ -56,7 +56,6 @@ Plug 'roxma/nvim-completion-manager'
 Plug 'roxma/python-support.nvim'
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'solarnz/thrift.vim'
-Plug 'ternjs/tern_for_vim', { 'do': 'npm install', 'for': ['javascript', 'javascript.jsx'] }
 Plug 'tmux-plugins/vim-tmux'
 Plug 'tmux-plugins/vim-tmux-focus-events'
 Plug 'tomtom/tcomment_vim'
@@ -86,9 +85,6 @@ let g:echodoc_enable_at_startup=1
 set splitbelow
 set completeopt+=noselect
 
-autocmd FileType javascript nnoremap <silent> <buffer> gb :TernDef<CR>
-autocmd FileType javascript.jsx nnoremap <silent> <buffer> gb :TernDef<CR>
-
 let g:chromatica#enable_at_startup=1
 let g:chromatica#libclang_path='/usr/local/opt/llvm/lib'
 
@@ -116,16 +112,6 @@ endif
 let g:neomake_javascript_enabled_makers = ['flow', 'eslint']
 let g:neomake_go_gometalinter_args = ['--disable-all', '--enable=gosimple', '--enable=staticcheck', '--enable=unused']
 autocmd! BufWritePost,BufEnter * Neomake
-
-" TERN
-let g:tern#command = ["tern"]
-let g:tern#arguments = ["--persistent"]
-let g:tern_map_keys=1
-let g:tern_map_prefix = '<leader>'
-let g:tern#filetypes = [
-  \ 'jsx',
-  \ 'javascript.jsx',
-\ ]
 
 let g:python_support_python3_requirements = add(get(g:,'python_support_python3_requirements',[]),'jedi')
 let g:python_support_python3_requirements = add(get(g:,'python_support_python3_requirements',[]),'mistune')
