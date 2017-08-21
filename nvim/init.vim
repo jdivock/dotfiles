@@ -80,28 +80,11 @@ xmap <C-k>     <Plug>(neosnippet_expand_target)
 " " Tell Neosnippet about the other snippets
 let g:neosnippet#snippets_directory='~/.nvim/plugged/vim-snippets, ~/.nvim/plugged/vim-react-snippets, ~/.nvim/pluggin/vim-es6 ~/.nvim/plugged/neosnippet-snippets'
 
-" " SuperTab like snippets behavior.
-" imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-"       \ "\<Plug>(neosnippet_expand_or_jump)"
-"       \: pumvisible() ? "\<C-n>" : "\<TAB>"
-" smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-"       \ "\<Plug>(neosnippet_expand_or_jump)"
-"       \: "\<TAB>"
-
-" Use deoplete.
 let g:deoplete#enable_at_startup = 1
 let g:echodoc_enable_at_startup=1
 set splitbelow
 set completeopt+=noselect
 
-" if !exists('g:deoplete#omni#input_patterns')
-"   let g:deoplete#omni#input_patterns = {}
-" endif
-" " let g:deoplete#disable_auto_complete = 1
-" autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
-" " <TAB>: completion.
-" inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-" tern
 autocmd FileType javascript nnoremap <silent> <buffer> gb :TernDef<CR>
 autocmd FileType javascript.jsx nnoremap <silent> <buffer> gb :TernDef<CR>
 
@@ -114,6 +97,8 @@ autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
 " autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
 autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+
+let g:jsx_ext_required = 0
 
 let g:deoplete#omni#functions = {}
 let g:deoplete#omni#functions.javascript = [
@@ -128,6 +113,8 @@ let g:deoplete#omni#functions['javascript.jsx'] = [
 set completeopt=longest,menuone,preview
 let g:deoplete#sources = {}
 let g:deoplete#sources['javascript.jsx'] = ['file', 'ultisnips', 'ternjs']
+let g:deoplete#omni#input_patterns = {}
+let g:deoplete#omni#input_patterns['javascript.jsx'] = '[^. *\t]\.\w*'
 
 autocmd FileType javascript let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
 autocmd FileType javascript.jsx let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
@@ -166,7 +153,6 @@ map q <Nop>
 " ack
 let g:ackprg = 'ag --nogroup --nocolor --column'
 
-" let g:jsx_ext_required = 0
 " recording macros is not my thing
 map q <Nop>
 
