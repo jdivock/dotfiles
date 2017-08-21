@@ -7,7 +7,6 @@ endfunction
 
 Plug 'AndrewRadev/vim-eco'
 Plug 'Chiel92/vim-autoformat'
-Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
 Plug 'Shougo/neosnippet-snippets'
 Plug 'Shougo/neosnippet.vim'
 Plug 'SirVer/ultisnips'
@@ -15,9 +14,9 @@ Plug 'airblade/vim-gitgutter'
 Plug 'ajh17/Spacegray.vim'
 Plug 'ap/vim-css-color'
 Plug 'arakashic/chromatica.nvim'
+Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
 Plug 'blueyed/smarty.vim'
 Plug 'cakebaker/scss-syntax.vim', { 'for': 'scss' }
-Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'derekwyatt/vim-scala', {'for': 'scala' }
 Plug 'editorconfig/editorconfig-vim'
@@ -51,9 +50,13 @@ Plug 'othree/jsdoc-syntax.vim', { 'for': ['javascript', 'javascript.jsx'] }
 Plug 'othree/jspc.vim', { 'for': ['javascript', 'javascript.jsx'] }
 Plug 'othree/yajs.vim', { 'for': ['javascript', 'javascript.jsx'] }
 Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
+Plug 'roxma/LanguageServer-php-neovim',  {'do': 'composer install && composer run-script parse-stubs'}
+Plug 'roxma/nvim-cm-tern',  {'do': 'npm install'}
+Plug 'roxma/nvim-completion-manager'
+Plug 'roxma/python-support.nvim'
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'solarnz/thrift.vim'
-Plug 'ternjs/tern_for_vim', { 'do': 'npm install' }
+Plug 'ternjs/tern_for_vim', { 'do': 'npm install', 'for': ['javascript', 'javascript.jsx'] }
 Plug 'tmux-plugins/vim-tmux'
 Plug 'tmux-plugins/vim-tmux-focus-events'
 Plug 'tomtom/tcomment_vim'
@@ -65,7 +68,6 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-ruby/vim-ruby'
 Plug 'vim-scripts/paredit.vim'
-Plug 'zchee/deoplete-go', { 'do': 'make'}
 
 Plug 'ryanoasis/vim-devicons'
 
@@ -80,7 +82,6 @@ xmap <C-k>     <Plug>(neosnippet_expand_target)
 " " Tell Neosnippet about the other snippets
 let g:neosnippet#snippets_directory='~/.nvim/plugged/vim-snippets, ~/.nvim/plugged/vim-react-snippets, ~/.nvim/pluggin/vim-es6 ~/.nvim/plugged/neosnippet-snippets'
 
-let g:deoplete#enable_at_startup = 1
 let g:echodoc_enable_at_startup=1
 set splitbelow
 set completeopt+=noselect
@@ -100,21 +101,7 @@ autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 
 let g:jsx_ext_required = 0
 
-let g:deoplete#omni#functions = {}
-let g:deoplete#omni#functions.javascript = [
-  \ 'tern#Complete',
-  \ 'jspc#omni'
-\]
-let g:deoplete#omni#functions['javascript.jsx'] = [
-  \ 'tern#Complete',
-  \ 'jspc#omni'
-\]
-
 set completeopt=longest,menuone,preview
-let g:deoplete#sources = {}
-let g:deoplete#sources['javascript.jsx'] = ['file', 'ultisnips', 'ternjs']
-let g:deoplete#omni#input_patterns = {}
-let g:deoplete#omni#input_patterns['javascript.jsx'] = '[^. *\t]\.\w*'
 
 autocmd FileType javascript let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
 autocmd FileType javascript.jsx let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
@@ -139,6 +126,13 @@ let g:tern#filetypes = [
   \ 'jsx',
   \ 'javascript.jsx',
 \ ]
+
+let g:python_support_python3_requirements = add(get(g:,'python_support_python3_requirements',[]),'jedi')
+let g:python_support_python3_requirements = add(get(g:,'python_support_python3_requirements',[]),'mistune')
+let g:python_support_python3_requirements = add(get(g:,'python_support_python3_requirements',[]),'psutil')
+let g:python_support_python3_requirements = add(get(g:,'python_support_python3_requirements',[]),'setproctitle')
+
+autocmd FileType php LanguageClientStart
 
 " Indentation
 autocmd Filetype json setlocal ts=2 sw=2 expandtab
