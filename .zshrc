@@ -39,8 +39,12 @@ function removeFromPath() {
 # eval "$(pyenv virtualenv-init -)"
 
 export EDITOR='vim';
-
 alias vim='nvim';
+
+if [[ -a "$HOME/.bin/tmuxinator.zsh" ]]; then
+  source $HOME/.bin/tmuxinator.zsh
+fi
+
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
