@@ -55,7 +55,7 @@ Plug 'roxma/ncm-rct-complete'
 Plug 'roxma/nvim-cm-tern',  {'do': 'npm install'}
 Plug 'roxma/nvim-completion-manager'
 Plug 'roxma/python-support.nvim'
-Plug 'sbdchd/neoformat'
+Plug 'sbdchd/neoformat', { 'for': ['javascript', 'javascript.jsx'] }
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'solarnz/thrift.vim'
 Plug 'tmux-plugins/vim-tmux'
@@ -90,8 +90,8 @@ set completeopt+=noselect
 let g:chromatica#enable_at_startup=1
 let g:chromatica#libclang_path='/usr/local/opt/llvm/lib'
 
-autocmd BufWritePre *.js Neoformat
-autocmd BufWritePre *.jsx Neoformat
+autocmd BufWritePre *.js Neoformat prettier
+autocmd BufWritePre *.jsx Neoformat prettier
 
 " Enable omni completion.
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
