@@ -42,7 +42,7 @@ Plug 'mileszs/ack.vim', { 'on': 'Ack' }
 Plug 'moll/vim-node'
 Plug 'mustache/vim-mustache-handlebars', { 'for': 'html.handlebars' }
 Plug 'mxw/vim-jsx', { 'for': ['javascript', 'javascript.jsx'] }
-Plug 'neomake/neomake'
+" Plug 'neomake/neomake'
 Plug 'othree/es.next.syntax.vim', { 'for': ['javascript', 'javascript.jsx'] }
 Plug 'othree/javascript-libraries-syntax.vim', { 'for': ['javascript', 'javascript.jsx'] }
 Plug 'othree/jsdoc-syntax.vim', { 'for': ['javascript', 'javascript.jsx'] }
@@ -65,6 +65,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-vinegar'
+Plug 'w0rp/ale'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-ruby/vim-ruby'
@@ -114,9 +115,9 @@ if has('nvim')
   nmap <BS> <C-W>h
 endif
 
-let g:neomake_javascript_enabled_makers = ['flow', 'eslint']
-let g:neomake_go_gometalinter_args = ['--disable-all', '--enable=gosimple', '--enable=staticcheck', '--enable=unused']
-autocmd! BufWritePost,BufEnter * Neomake
+" let g:neomake_javascript_enabled_makers = ['flow', 'eslint']
+" let g:neomake_go_gometalinter_args = ['--disable-all', '--enable=gosimple', '--enable=staticcheck', '--enable=unused']
+" autocmd! BufWritePost,BufEnter * Neomake
 
 let g:python_support_python3_requirements = add(get(g:,'python_support_python3_requirements',[]),'jedi')
 let g:python_support_python3_requirements = add(get(g:,'python_support_python3_requirements',[]),'mistune')
