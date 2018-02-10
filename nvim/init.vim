@@ -42,7 +42,6 @@ Plug 'mileszs/ack.vim', { 'on': 'Ack' }
 Plug 'moll/vim-node'
 Plug 'mustache/vim-mustache-handlebars', { 'for': 'html.handlebars' }
 Plug 'mxw/vim-jsx', { 'for': ['javascript', 'javascript.jsx'] }
-" Plug 'neomake/neomake'
 Plug 'othree/es.next.syntax.vim', { 'for': ['javascript', 'javascript.jsx'] }
 Plug 'othree/javascript-libraries-syntax.vim', { 'for': ['javascript', 'javascript.jsx'] }
 Plug 'othree/jsdoc-syntax.vim', { 'for': ['javascript', 'javascript.jsx'] }
@@ -76,14 +75,6 @@ Plug 'ryanoasis/vim-devicons'
 " Add plugins to &runtimepath
 call plug#end()
 
-" Enable snipMate compatibility feature.
-let g:neosnippet#enable_snipmate_compatibility = 1
-imap <C-k>     <Plug>(neosnippet_expand_or_jump)
-smap <C-k>     <Plug>(neosnippet_expand_or_jump)
-xmap <C-k>     <Plug>(neosnippet_expand_target)
-" " Tell Neosnippet about the other snippets
-let g:neosnippet#snippets_directory='~/.nvim/plugged/vim-snippets, ~/.nvim/plugged/vim-react-snippets, ~/.nvim/pluggin/vim-es6 ~/.nvim/plugged/neosnippet-snippets'
-
 let g:echodoc_enable_at_startup=1
 set splitbelow
 set completeopt+=noselect
@@ -103,21 +94,10 @@ autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 
 let g:jsx_ext_required = 0
 
-set completeopt=longest,menuone,preview
-
-autocmd FileType javascript let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
-autocmd FileType javascript.jsx let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
-let g:UltiSnipsExpandTrigger="<C-j>"
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-
 " Stupid mac
 if has('nvim')
   nmap <BS> <C-W>h
 endif
-
-" let g:neomake_javascript_enabled_makers = ['flow', 'eslint']
-" let g:neomake_go_gometalinter_args = ['--disable-all', '--enable=gosimple', '--enable=staticcheck', '--enable=unused']
-" autocmd! BufWritePost,BufEnter * Neomake
 
 let g:python_support_python3_requirements = add(get(g:,'python_support_python3_requirements',[]),'jedi')
 let g:python_support_python3_requirements = add(get(g:,'python_support_python3_requirements',[]),'mistune')
@@ -141,9 +121,6 @@ map q <Nop>
 
 " ack
 let g:ackprg = 'ag --nogroup --nocolor --column'
-
-" recording macros is not my thing
-map q <Nop>
 
 function! s:fzf_statusline()
   " Override statusline as you like
@@ -184,10 +161,6 @@ set shiftwidth=2
 set softtabstop=2
 set tabstop=2
 set expandtab
-
-" Auto indent pasted text
-" nnoremap p p=`]<C-o>
-" nnoremap P P=`]<C-o>
 
 filetype plugin on
 filetype indent on
@@ -283,7 +256,6 @@ au BufRead,BufNewFile .jshintrc setfiletype json
 au BufRead,BufNewFile .eslintrc setfiletype yaml
 
 au BufWritePost * redraw!
-
 
 set secure
 set exrc
