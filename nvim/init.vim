@@ -75,7 +75,6 @@ Plug 'ryanoasis/vim-devicons'
 " Add plugins to &runtimepath
 call plug#end()
 
-let g:echodoc_enable_at_startup=1
 set splitbelow
 set completeopt+=noselect
 
@@ -84,13 +83,6 @@ let g:chromatica#libclang_path='/usr/local/opt/llvm/lib'
 
 autocmd BufWritePre *.js Neoformat prettier
 autocmd BufWritePre *.jsx Neoformat prettier
-
-" Enable omni completion.
-autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-" autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 
 let g:jsx_ext_required = 0
 
@@ -103,7 +95,6 @@ let g:python_support_python3_requirements = add(get(g:,'python_support_python3_r
 let g:python_support_python3_requirements = add(get(g:,'python_support_python3_requirements',[]),'mistune')
 let g:python_support_python3_requirements = add(get(g:,'python_support_python3_requirements',[]),'psutil')
 let g:python_support_python3_requirements = add(get(g:,'python_support_python3_requirements',[]),'setproctitle')
-
 
 autocmd FileType php LanguageClientStart
 
@@ -167,7 +158,6 @@ filetype indent on
 
 " map 'jk' to <ESC>
 imap jk <Esc>
-let g:used_javascript_libs = 'react,underscore'
 
 " Display tabs and trailing spaces visually
 set list listchars=tab:\ \ ,trail:·
@@ -200,9 +190,6 @@ set incsearch       " Find the next match as we type the search
 set hlsearch        " Highlight searches by default
 set ignorecase      " Ignore case when searching...
 set smartcase       " ...unless we type a capital
-
-" Autoformat
-noremap <leader>f :Autoformat<CR>
 
 " Wrap toggle
 nnoremap <leader>wr :set wrap! wrap?<CR>
@@ -237,16 +224,6 @@ autocmd! User FzfStatusLine call <SID>fzf_statusline()
 
 syntax on
 
-" Remove whitespace on save
-function! TrimWhiteSpace()
-  %s/\s\+$//e
-endfunction
-
-autocmd FileWritePre    * :call TrimWhiteSpace()
-autocmd FileAppendPre   * :call TrimWhiteSpace()
-autocmd FilterWritePre  * :call TrimWhiteSpace()
-autocmd BufWritePre     * :call TrimWhiteSpace()
-
 autocmd BufNewFile,BufRead *.txt set wrap
 
 nnoremap <silent> <Leader>rts :call TrimWhiteSpace()<CR>
@@ -254,8 +231,6 @@ nnoremap <silent> <Leader>rts :call TrimWhiteSpace()<CR>
 " Set unknown filetypes
 au BufRead,BufNewFile .jshintrc setfiletype json
 au BufRead,BufNewFile .eslintrc setfiletype yaml
-
-au BufWritePost * redraw!
 
 set secure
 set exrc
