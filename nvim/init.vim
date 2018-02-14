@@ -6,13 +6,10 @@ function! DoRemote(arg)
 endfunction
 
 Plug 'AndrewRadev/vim-eco'
-Plug 'Chiel92/vim-autoformat'
-Plug 'Shougo/neosnippet-snippets'
-Plug 'Shougo/neosnippet.vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'ajh17/Spacegray.vim'
 Plug 'ap/vim-css-color'
-Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
+Plug 'autozimu/LanguageClient-neovim', {'branch': 'next', 'do': 'bash install.sh'}
 Plug 'blueyed/smarty.vim'
 Plug 'cakebaker/scss-syntax.vim', { 'for': 'scss' }
 Plug 'calebeby/ncm-css'
@@ -26,16 +23,12 @@ Plug 'fsharp/vim-fsharp', {'for': 'fsharp', 'do':  'make fsautocomplete'}
 Plug 'groenewege/vim-less', { 'for': 'less' }
 Plug 'isRuslan/vim-es6', { 'for': ['javascript', 'javascript.jsx'] }
 Plug 'jiangmiao/auto-pairs'
-Plug 'jreybert/vimagit'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-Plug 'justinj/vim-react-snippets', { 'for': ['javascript', 'javascript.jsx'] }
 Plug 'kchmck/vim-coffee-script'
 Plug 'lambdatoast/elm.vim', { 'for': 'elm' }
 Plug 'majutsushi/tagbar'
 Plug 'mattn/gist-vim'
-Plug 'mileszs/ack.vim', { 'on': 'Ack' }
-Plug 'moll/vim-node'
 Plug 'mustache/vim-mustache-handlebars', { 'for': 'html.handlebars' }
 Plug 'mxw/vim-jsx', { 'for': ['javascript', 'javascript.jsx'] }
 Plug 'othree/es.next.syntax.vim', { 'for': ['javascript', 'javascript.jsx'] }
@@ -47,10 +40,10 @@ Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
 Plug 'roxma/LanguageServer-php-neovim',  {'do': 'composer install && composer run-script parse-stubs'}
 Plug 'roxma/ncm-flow'
 Plug 'roxma/ncm-rct-complete'
-Plug 'roxma/nvim-cm-tern',  {'do': 'npm install'}
+Plug 'roxma/nvim-cm-tern',  {'do': 'yarn install'}
 Plug 'roxma/nvim-completion-manager'
 Plug 'roxma/python-support.nvim'
-Plug 'sbdchd/neoformat', { 'for': ['javascript', 'javascript.jsx'] }
+Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'solarnz/thrift.vim'
 Plug 'tmux-plugins/vim-tmux'
@@ -77,10 +70,13 @@ set completeopt+=noselect
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
-autocmd BufWritePre *.js Neoformat prettier
-autocmd BufWritePre *.jsx Neoformat prettier
+let g:prettier#autoformat = 0
+autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue PrettierAsync
 
 let g:jsx_ext_required = 0
+
+" othree/javascript-libraries-syntax
+let g:used_javascript_libs = 'underscore,backbone,react,jquery'
 
 " Stupid mac
 if has('nvim')
@@ -220,6 +216,7 @@ command! -bang -nargs=* Rg
 " Likewise, GitFiles command with preview window
 command! -bang -nargs=? -complete=dir GitFiles
   \ call fzf#vim#gitfiles(<q-args>, fzf#vim#with_preview(), <bang>0)
+"
 
 " Command for git grep
 " - fzf#vim#grep(command, with_column, [options], [fullscreen])
@@ -252,3 +249,12 @@ au BufWritePost * redraw!
 
 set secure
 set exrc
+
+" Required for operations modifying multiple buffers like rename.
+set hidden
+
+let g:LanguageClient_serverCommands = {
+    \ 'rust': ['rustup', 'run', 'nightly', 'rls'],
+    \ }
+
+let g:LanguageClient_autoStart = 1
