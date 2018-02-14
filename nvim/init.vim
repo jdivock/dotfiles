@@ -9,11 +9,9 @@ Plug 'AndrewRadev/vim-eco'
 Plug 'Chiel92/vim-autoformat'
 Plug 'Shougo/neosnippet-snippets'
 Plug 'Shougo/neosnippet.vim'
-Plug 'SirVer/ultisnips'
 Plug 'airblade/vim-gitgutter'
 Plug 'ajh17/Spacegray.vim'
 Plug 'ap/vim-css-color'
-Plug 'arakashic/chromatica.nvim'
 Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
 Plug 'blueyed/smarty.vim'
 Plug 'cakebaker/scss-syntax.vim', { 'for': 'scss' }
@@ -25,9 +23,7 @@ Plug 'elzr/vim-json', { 'for': 'json' }
 Plug 'fatih/vim-go'
 Plug 'flazz/vim-colorschemes'
 Plug 'fsharp/vim-fsharp', {'for': 'fsharp', 'do':  'make fsautocomplete'}
-Plug 'godlygeek/tabular'
 Plug 'groenewege/vim-less', { 'for': 'less' }
-Plug 'honza/vim-snippets'
 Plug 'isRuslan/vim-es6', { 'for': ['javascript', 'javascript.jsx'] }
 Plug 'jiangmiao/auto-pairs'
 Plug 'jreybert/vimagit'
@@ -78,8 +74,8 @@ call plug#end()
 set splitbelow
 set completeopt+=noselect
 
-let g:chromatica#enable_at_startup=1
-let g:chromatica#libclang_path='/usr/local/opt/llvm/lib'
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
 autocmd BufWritePre *.js Neoformat prettier
 autocmd BufWritePre *.jsx Neoformat prettier
@@ -113,15 +109,6 @@ map q <Nop>
 " ack
 let g:ackprg = 'ag --nogroup --nocolor --column'
 
-function! s:fzf_statusline()
-  " Override statusline as you like
-  highlight fzf1 ctermfg=161 ctermbg=251
-  highlight fzf2 ctermfg=23 ctermbg=251
-  highlight fzf3 ctermfg=237 ctermbg=251
-  setlocal statusline=%#fzf1#\ >\ %#fzf2#fz%#fzf3#f
-endfunction
-
-autocmd! User FzfStatusLine call <SID>fzf_statusline()
 
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
@@ -222,7 +209,36 @@ endfunction
 
 autocmd! User FzfStatusLine call <SID>fzf_statusline()
 
+" Similarly, we can apply it to fzf#vim#grep. To use ripgrep instead of ag:
+command! -bang -nargs=* Rg
+  \ call fzf#vim#grep(
+  \   'rg --column --line-number --no-heading --color=always '.shellescape(<q-args>), 1,
+  \   <bang>0 ? fzf#vim#with_preview('up:60%')
+  \           : fzf#vim#with_preview('right:50%:hidden', '?'),
+  \   <bang>0)
+
+" Likewise, GitFiles command with preview window
+command! -bang -nargs=? -complete=dir GitFiles
+  \ call fzf#vim#gitfiles(<q-args>, fzf#vim#with_preview(), <bang>0)
+
+" Command for git grep
+" - fzf#vim#grep(command, with_column, [options], [fullscreen])
+command! -bang -nargs=* GGrep
+  \ call fzf#vim#grep('git grep --line-number '.shellescape(<q-args>), 0, <bang>0)
+
+autocmd! User FzfStatusLine call <SID>fzf_statusline()
+
 syntax on
+
+" Remove whitespace on save
+function! TrimWhiteSpace()
+  %s/\s\+$//e
+endfunction
+
+autocmd FileWritePre    * :call TrimWhiteSpace()
+autocmd FileAppendPre   * :call TrimWhiteSpace()
+autocmd FilterWritePre  * :call TrimWhiteSpace()
+autocmd BufWritePre     * :call TrimWhiteSpace()
 
 autocmd BufNewFile,BufRead *.txt set wrap
 
@@ -231,6 +247,8 @@ nnoremap <silent> <Leader>rts :call TrimWhiteSpace()<CR>
 " Set unknown filetypes
 au BufRead,BufNewFile .jshintrc setfiletype json
 au BufRead,BufNewFile .eslintrc setfiletype yaml
+
+au BufWritePost * redraw!
 
 set secure
 set exrc
