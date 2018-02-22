@@ -11,7 +11,7 @@ export ZSH=$HOME/.oh-my-zsh
 # time that oh-my-zsh is loaded.
 ZSH_THEME="refined"
 
-plugins=(jsontools aws git git-extras osx docker brew brew-cask node npm tmux vi-mode)
+plugins=(arcanist aws brew brew-cask docker emoji git git-extras iterm2 jsontools node npm osx rbenv ruby tmux vi-mode yarn)
 
 # User configuration
 export GOPATH=$HOME/golang
