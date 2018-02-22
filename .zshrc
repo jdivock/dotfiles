@@ -19,7 +19,7 @@ export PATH="./node_modules/.bin:$GOPATH/bin:/usr/local/opt/go/libexec/bin:/usr/
 
 source $ZSH/oh-my-zsh.sh
 
-export EDITOR='vim';
+export EDITOR='nvim';
 alias vim='nvim';
 
 if [[ -a "$HOME/.bin/tmuxinator.zsh" ]]; then
