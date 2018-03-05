@@ -38,6 +38,7 @@ Plug 'othree/jspc.vim', { 'for': ['javascript', 'javascript.jsx'] }
 Plug 'othree/yajs.vim', { 'for': ['javascript', 'javascript.jsx'] }
 Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
 Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
+Plug 'romainl/vim-qf'
 Plug 'roxma/LanguageServer-php-neovim',  {'do': 'composer install && composer run-script parse-stubs'}
 Plug 'roxma/ncm-flow'
 Plug 'roxma/ncm-rct-complete'
@@ -194,6 +195,12 @@ nmap <C-n> :NERDTreeToggle<CR>
 " FZF
 nmap <C-p> :GitFiles<CR>
 nmap <leader>n :Buffers<CR>
+
+
+" Vim-QF config
+let g:qf_mapping_ack_style = 1
+let g:qf_auto_open_quickfix = 0
+let g:qf_auto_open_loclist = 0
 
 function! s:fzf_statusline()
   " Override statusline as you like
