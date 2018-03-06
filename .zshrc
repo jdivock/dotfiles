@@ -13,7 +13,7 @@ CFLAGS='-O2'
 # time that oh-my-zsh is loaded.
 ZSH_THEME="refined"
 
-plugins=(arcanist aws brew brew-cask docker emoji git git-extras iterm2 jsontools node npm osx rbenv ruby tmux vi-mode yarn)
+plugins=(arcanist aws brew brew-cask docker emoji git git-extras iterm2 jsontools node npm osx ruby tmux vi-mode yarn)
 
 # User configuration
 export GOPATH=$HOME/golang
