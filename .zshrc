@@ -15,6 +15,10 @@ ZSH_THEME="refined"
 
 plugins=(arcanist aws brew brew-cask docker emoji git git-extras iterm2 jsontools node npm osx ruby tmux vi-mode yarn)
 
+eval "$(rbenv init -)"
+eval "$(nodenv init -)"
+eval "$(pyenv init -)"
+
 # User configuration
 export GOPATH=$HOME/golang
 export PATH="./node_modules/.bin:$GOPATH/bin:/usr/local/opt/go/libexec/bin:/usr/local/bin:/usr/local/heroku/bin:/usr/bin:/bin:/usr/sbin:/sbin:$HOME/bin:$PATH"
@@ -28,8 +32,5 @@ if [[ -a "$HOME/.bin/tmuxinator.zsh" ]]; then
   source $HOME/.bin/tmuxinator.zsh
 fi
 
-eval "$(rbenv init -)"
-eval "$(nodenv init -)"
-eval "$(pyenv init -)"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

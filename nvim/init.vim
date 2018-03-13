@@ -44,7 +44,7 @@ Plug 'roxma/ncm-flow'
 Plug 'roxma/ncm-rct-complete'
 Plug 'roxma/nvim-cm-tern',  {'do': 'yarn install'}
 Plug 'roxma/nvim-completion-manager'
-Plug 'roxma/python-support.nvim'
+" Plug 'roxma/python-support.nvim'
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'solarnz/thrift.vim'
 Plug 'tmux-plugins/vim-tmux'
