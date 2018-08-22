@@ -41,10 +41,11 @@ Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 Plug 'rodjek/vim-puppet'
 Plug 'romainl/vim-qf'
 Plug 'roxma/LanguageServer-php-neovim',  {'do': 'composer install && composer run-script parse-stubs'}
-Plug 'roxma/ncm-flow'
+" Plug 'roxma/ncm-flow'
 Plug 'roxma/ncm-rct-complete'
 Plug 'roxma/nvim-cm-tern',  {'do': 'yarn install'}
 Plug 'ncm2/ncm2'
+Plug 'roxma/nvim-yarp'
 " Plug 'roxma/python-support.nvim'
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'solarnz/thrift.vim'
@@ -77,6 +78,8 @@ let g:github_enterprise_urls = ['https://git.corp.stripe.com']
 
 let g:prettier#autoformat = 0
 autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.less,*.scss,*.json,*.graphql,*.md,*.vue PrettierAsync
+
+let g:ale_ruby_rubocop_executable = 'bundle'
 
 let g:jsx_ext_required = 0
 
@@ -214,6 +217,18 @@ let g:fzf_action = {
 let g:fzf_buffers_jump = 1
 let $FZF_DEFAULT_OPTS = '--bind ctrl-a:select-all'
 
+ " enable ncm2 for all buffers
+autocmd BufEnter * call ncm2#enable_for_buffer()
+
+" IMPORTANTE: :help Ncm2PopupOpen for more information
+set completeopt=noinsert,menuone,noselect
+
+" NOTE: you need to install completion sources to get completions. Check
+" our wiki page for a list of sources: https://github.com/ncm2/ncm2/wiki
+Plug 'ncm2/ncm2-bufword'
+Plug 'ncm2/ncm2-tmux'
+Plug 'ncm2/ncm2-path'
+
 " function! s:ag_to_qf(line)
 "   let parts = split(a:line, ':')
 "   return {'filename': parts[0], 'lnum': parts[1], 'col': parts[2],
@@ -327,6 +342,14 @@ set hidden
 
 let g:LanguageClient_serverCommands = {
     \ 'rust': ['rustup', 'run', 'nightly', 'rls'],
+    \ 'javascript': ['flow', 'lsp', '--from', './node_modules/.bin'],
+    \ 'javascript.jsx': ['flow', 'lsp', '--from', './node_modules/.bin'],
     \ }
 
 let g:LanguageClient_autoStart = 1
+
+nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
+nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
+
+let g:LanguageClient_rootMarkers = ['.flowconfig']
+
