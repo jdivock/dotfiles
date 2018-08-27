@@ -45,6 +45,9 @@ Plug 'roxma/LanguageServer-php-neovim',  {'do': 'composer install && composer ru
 Plug 'roxma/ncm-rct-complete'
 Plug 'roxma/nvim-cm-tern',  {'do': 'yarn install'}
 Plug 'ncm2/ncm2'
+Plug 'roxma/ncm-ruby'
+Plug 'roxma/vim-ruby'
+Plug 'roxma/nvim-ascript'
 Plug 'roxma/nvim-yarp'
 " Plug 'roxma/python-support.nvim'
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
