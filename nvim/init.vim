@@ -25,6 +25,7 @@ Plug 'isRuslan/vim-es6', { 'for': ['javascript', 'javascript.jsx'] }
 Plug 'jiangmiao/auto-pairs'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
+Plug 'jparise/vim-graphql'
 Plug 'kchmck/vim-coffee-script'
 Plug 'lambdatoast/elm.vim', { 'for': 'elm' }
 Plug 'majutsushi/tagbar'
