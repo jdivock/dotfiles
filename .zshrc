@@ -14,12 +14,12 @@ CFLAGS='-O2'
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
 ZSH_THEME="refined"
-# ZSH_THEME="zhann"
 
 plugins=(aws brew docker emoji fzf git git-extras history history-substring-search iterm2 jsontools node npm macos ripgrep ruby ssh-agent terraform tmux tmuxinator yarn)
 
 export GOPATH=$HOME/golang
-export PATH="$GOPATH/bin:/usr/local/opt/go/libexec/bin:/usr/local/bin:/usr/local/heroku/bin:/usr/bin:/bin:/usr/sbin:/sbin:$HOME/bin:$PATH"
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="./node_modules/.bin:$PYENV_ROOT/bin:$HOME/.nodenv/bin:$GOPATH/bin:/usr/local/opt/go/libexec/bin:/usr/local/bin:/usr/local/heroku/bin:/usr/bin:/bin:/usr/sbin:/sbin:$HOME/bin:$PATH"
 
 
 if [[ -a "$HOME/.privaterc" ]]; then
@@ -37,7 +37,6 @@ fi
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-eval "$(nodenv init -)"
 
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
@@ -46,3 +45,4 @@ eval "$(pyenv init --path)"
 
 export PATH="./node_modules/.bin:$PATH"
 export PATH="/usr/local/sbin:$PATH"
+eval "$(nodenv init -)"
