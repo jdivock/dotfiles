@@ -9,7 +9,7 @@ Plug 'AndrewRadev/vim-eco'
 Plug 'airblade/vim-gitgutter'
 Plug 'ajh17/Spacegray.vim'
 Plug 'ap/vim-css-color'
-Plug 'autozimu/LanguageClient-neovim', {'branch': 'next', 'do': 'bash install.sh'}
+" Plug 'autozimu/LanguageClient-neovim', {'branch': 'next', 'do': 'bash install.sh'}
 Plug 'blueyed/smarty.vim'
 Plug 'cakebaker/scss-syntax.vim', { 'for': 'scss' }
 Plug 'calebeby/ncm-css'
@@ -41,16 +41,20 @@ Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
 Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 Plug 'rodjek/vim-puppet'
 Plug 'romainl/vim-qf'
-Plug 'roxma/LanguageServer-php-neovim',  {'do': 'composer install && composer run-script parse-stubs'}
-" Plug 'roxma/ncm-flow'
+" Plug 'roxma/LanguageServer-php-neovim',  {'do': 'composer install && composer run-script parse-stubs'}
+" Plug 'roxma/nvim-cm-tern',  {'do': 'yarn install'}
+" Plug 'roxma/nvim-ascript'
+" Plug 'roxma/python-support.nvim'
 Plug 'roxma/ncm-rct-complete'
-Plug 'roxma/nvim-cm-tern',  {'do': 'yarn install'}
 Plug 'ncm2/ncm2'
+Plug 'roxma/nvim-yarp'
+Plug 'ncm2/ncm2-bufword'
+Plug 'ncm2/ncm2-tmux'
+Plug 'ncm2/ncm2-path'
+Plug 'ncm2/ncm2-tern',  {'do': 'npm install'}
+Plug 'roxma/ncm-flow'
 Plug 'roxma/ncm-ruby'
 Plug 'roxma/vim-ruby'
-Plug 'roxma/nvim-ascript'
-Plug 'roxma/nvim-yarp'
-" Plug 'roxma/python-support.nvim'
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'solarnz/thrift.vim'
 Plug 'tmux-plugins/vim-tmux'
@@ -84,11 +88,15 @@ let g:prettier#autoformat = 0
 autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.less,*.scss,*.json,*.graphql,*.md,*.vue PrettierAsync
 
 let g:ale_ruby_rubocop_executable = 'bundle'
+" let g:ale_fixers = {
+" \  'javascript': ['eslint'],
+" \}
+" let g:ale_fix_on_save = 1
 
 let g:jsx_ext_required = 0
 
 " othree/javascript-libraries-syntax
-let g:used_javascript_libs = 'underscore,backbone,react,jquery'
+" let g:used_javascript_libs = 'underscore,backbone,react,jquery'
 
 " Stupid mac
 if has('nvim')
@@ -100,7 +108,7 @@ let g:python_support_python3_requirements = add(get(g:,'python_support_python3_r
 let g:python_support_python3_requirements = add(get(g:,'python_support_python3_requirements',[]),'psutil')
 let g:python_support_python3_requirements = add(get(g:,'python_support_python3_requirements',[]),'setproctitle')
 
-autocmd FileType php LanguageClientStart
+" autocmd FileType php LanguageClientStart
 
 " Indentation
 autocmd Filetype json setlocal ts=2 sw=2 expandtab
@@ -227,48 +235,6 @@ autocmd BufEnter * call ncm2#enable_for_buffer()
 " IMPORTANTE: :help Ncm2PopupOpen for more information
 set completeopt=noinsert,menuone,noselect
 
-" NOTE: you need to install completion sources to get completions. Check
-" our wiki page for a list of sources: https://github.com/ncm2/ncm2/wiki
-Plug 'ncm2/ncm2-bufword'
-Plug 'ncm2/ncm2-tmux'
-Plug 'ncm2/ncm2-path'
-
-" function! s:ag_to_qf(line)
-"   let parts = split(a:line, ':')
-"   return {'filename': parts[0], 'lnum': parts[1], 'col': parts[2],
-"         \ 'text': join(parts[3:], ':')}
-" endfunction
-"
-" function! s:ag_handler(lines)
-"   if len(a:lines) < 2 | return | endif
-"
-"   let cmd = get({'ctrl-x': 'split',
-"                \ 'ctrl-v': 'vertical split',
-"                \ 'ctrl-t': 'tabe'}, a:lines[0], 'e')
-"   let list = map(a:lines[1:], 's:ag_to_qf(v:val)')
-"
-"   let first = list[0]
-"   execute cmd escape(first.filename, ' %#\')
-"   execute first.lnum
-"   execute 'normal!' first.col.'|zz'
-"
-"   if len(list) > 1
-"     call setqflist(list)
-"     copen
-"     wincmd p
-"   endif
-" endfunction
-"
-" command! -nargs=* Ag call fzf#run({
-" \ 'source':  printf('ag --nogroup --column --color "%s"',
-" \                   escape(empty(<q-args>) ? '^(?=.)' : <q-args>, '"\')),
-" \ 'sink*':    function('<sid>ag_handler'),
-" \ 'options': '--ansi --expect=ctrl-t,ctrl-v,ctrl-x --delimiter : --nth 4.. '.
-" \            '--multi --bind=ctrl-a:select-all,ctrl-d:deselect-all '.
-" \            '--color hl:68,hl+:110',
-" \ 'down':    '50%'
-" \ })
-
 
 " Vim-QF config
 let g:qf_mapping_ack_style = 1
@@ -336,7 +302,7 @@ nnoremap <silent> <Leader>rts :call TrimWhiteSpace()<CR>
 au BufRead,BufNewFile .jshintrc setfiletype json
 au BufRead,BufNewFile .eslintrc setfiletype yaml
 
-au BufWritePost * redraw!
+" au BufWritePost * redraw!
 
 set secure
 set exrc
@@ -344,16 +310,16 @@ set exrc
 " Required for operations modifying multiple buffers like rename.
 set hidden
 
-let g:LanguageClient_serverCommands = {
-    \ 'rust': ['rustup', 'run', 'nightly', 'rls'],
-    \ 'javascript': ['flow', 'lsp', '--from', './node_modules/.bin'],
-    \ 'javascript.jsx': ['flow', 'lsp', '--from', './node_modules/.bin'],
-    \ }
+" let g:LanguageClient_serverCommands = {
+"     \ 'rust': ['rustup', 'run', 'nightly', 'rls'],
+"     \ 'javascript': ['flow', 'lsp', '--from', './node_modules/.bin'],
+"     \ 'javascript.jsx': ['flow', 'lsp', '--from', './node_modules/.bin'],
+"     \ }
+"
+" let g:LanguageClient_autoStart = 1
 
-let g:LanguageClient_autoStart = 1
-
-nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
-nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
-
-let g:LanguageClient_rootMarkers = ['.flowconfig']
-
+" nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
+" nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
+"
+" let g:LanguageClient_rootMarkers = ['.flowconfig']
+"
