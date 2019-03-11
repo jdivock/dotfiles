@@ -38,7 +38,7 @@ Plug 'othree/jsdoc-syntax.vim', { 'for': ['javascript', 'javascript.jsx'] }
 Plug 'othree/jspc.vim', { 'for': ['javascript', 'javascript.jsx'] }
 Plug 'othree/yajs.vim', { 'for': ['javascript', 'javascript.jsx'] }
 Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
-Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
+" Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 Plug 'rodjek/vim-puppet'
 Plug 'romainl/vim-qf'
 " Plug 'roxma/LanguageServer-php-neovim',  {'do': 'composer install && composer run-script parse-stubs'}
@@ -84,14 +84,23 @@ inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
 let g:github_enterprise_urls = ['https://git.corp.stripe.com']
 
-let g:prettier#autoformat = 0
-autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.less,*.scss,*.json,*.graphql,*.md,*.vue PrettierAsync
+augroup FiletypeGroup
+    autocmd!
+    au BufNewFile,BufRead *.jsx set filetype=javascript.jsx
+augroup END
 
-let g:ale_ruby_rubocop_executable = 'bundle'
+" let g:prettier#autoformat = 0
+" autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.less,*.scss,*.json,*.graphql,*.md,*.vue PrettierAsync
+
+" let g:ale_ruby_rubocop_executable = 'bundle'
 " let g:ale_fixers = {
 " \  'javascript': ['eslint'],
 " \}
-" let g:ale_fix_on_save = 1
+" Fix files with prettier, and then ESLint.
+let g:ale_linter_aliases = {'jsx': ['css', 'javascript']}
+let g:ale_linters = {'jsx': ['stylelint', 'eslint']}
+let g:ale_fixers = ['prettier', 'eslint']
+let g:ale_fix_on_save = 1
 
 let g:jsx_ext_required = 0
 
