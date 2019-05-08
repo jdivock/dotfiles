@@ -97,8 +97,8 @@ augroup END
 " \  'javascript': ['eslint'],
 " \}
 " Fix files with prettier, and then ESLint.
-let g:ale_linter_aliases = {'jsx': ['css', 'javascript']}
-let g:ale_linters = {'jsx': ['stylelint', 'eslint']}
+let g:ale_linter_aliases = {'jsx': ['css', 'javascript', 'javascript.jsx']}
+let g:ale_linters = {'jsx': ['eslint']}
 let g:ale_fixers = ['prettier', 'eslint']
 let g:ale_fix_on_save = 1
 

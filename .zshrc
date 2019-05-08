@@ -23,6 +23,8 @@ source $ZSH/oh-my-zsh.sh
 export EDITOR='nvim';
 alias vim='nvim';
 
+alias fixaudio=ps aux | grep 'coreaudio[d]' | awk '{print $2}' | xargs sudo kill
+
 if [[ -a "$HOME/.bin/tmuxinator.zsh" ]]; then
   source $HOME/.bin/tmuxinator.zsh
 fi
