@@ -1,6 +1,3 @@
-if [[ -a "$HOME/.privaterc" ]]; then
-  source $HOME/.privaterc
-fi
 
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
@@ -17,6 +14,10 @@ plugins=(arcanist aws brew brew-cask docker emoji git git-extras iterm2 jsontool
 
 export GOPATH=$HOME/golang
 export PATH="$GOPATH/bin:/usr/local/opt/go/libexec/bin:/usr/local/bin:/usr/local/heroku/bin:/usr/bin:/bin:/usr/sbin:/sbin:$HOME/bin:$PATH"
+
+if [[ -a "$HOME/.privaterc" ]]; then
+  source $HOME/.privaterc
+fi
 
 source $ZSH/oh-my-zsh.sh
 

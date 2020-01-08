@@ -99,7 +99,9 @@ augroup END
 " Fix files with prettier, and then ESLint.
 let g:ale_linter_aliases = {'jsx': ['css', 'javascript', 'javascript.jsx']}
 let g:ale_linters = {'jsx': ['eslint']}
-let g:ale_fixers = ['prettier', 'eslint']
+" let g:ale_fixers = ['prettier', 'eslint']
+let g:ale_fixers = {}
+let g:ale_fixers.javascript = ['eslint', 'prettier']
 let g:ale_fix_on_save = 1
 
 let g:jsx_ext_required = 0
@@ -309,6 +311,7 @@ nnoremap <silent> <Leader>rts :call TrimWhiteSpace()<CR>
 
 " Set unknown filetypes
 au BufRead,BufNewFile .jshintrc setfiletype json
+au BufRead,BufNewFile .babelrc setfiletype json
 au BufRead,BufNewFile .eslintrc setfiletype yaml
 
 " au BufWritePost * redraw!
