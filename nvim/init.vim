@@ -9,7 +9,6 @@ Plug 'AndrewRadev/vim-eco'
 Plug 'airblade/vim-gitgutter'
 Plug 'ajh17/Spacegray.vim'
 Plug 'ap/vim-css-color'
-" Plug 'autozimu/LanguageClient-neovim', {'branch': 'next', 'do': 'bash install.sh'}
 Plug 'blueyed/smarty.vim'
 Plug 'cakebaker/scss-syntax.vim', { 'for': 'scss' }
 Plug 'calebeby/ncm-css'
@@ -21,9 +20,11 @@ Plug 'fatih/vim-go'
 Plug 'flazz/vim-colorschemes'
 Plug 'fsharp/vim-fsharp', {'for': 'fsharp', 'do':  'make fsautocomplete'}
 Plug 'groenewege/vim-less', { 'for': 'less' }
-Plug 'isRuslan/vim-es6', { 'for': ['javascript', 'javascript.jsx'] }
+Plug 'isRuslan/vim-es6'
 Plug 'jiangmiao/auto-pairs'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'HerringtonDarkholme/yats.vim'
+Plug 'mhartington/nvim-typescript', {'do': './install.sh'}
 Plug 'junegunn/fzf.vim'
 Plug 'jparise/vim-graphql'
 Plug 'kchmck/vim-coffee-script'
@@ -31,20 +32,15 @@ Plug 'lambdatoast/elm.vim', { 'for': 'elm' }
 Plug 'majutsushi/tagbar'
 Plug 'mattn/gist-vim'
 Plug 'mustache/vim-mustache-handlebars', { 'for': 'html.handlebars' }
-Plug 'mxw/vim-jsx', { 'for': ['javascript', 'javascript.jsx'] }
-Plug 'othree/es.next.syntax.vim', { 'for': ['javascript', 'javascript.jsx'] }
-Plug 'othree/javascript-libraries-syntax.vim', { 'for': ['javascript', 'javascript.jsx'] }
-Plug 'othree/jsdoc-syntax.vim', { 'for': ['javascript', 'javascript.jsx'] }
-Plug 'othree/jspc.vim', { 'for': ['javascript', 'javascript.jsx'] }
-Plug 'othree/yajs.vim', { 'for': ['javascript', 'javascript.jsx'] }
+Plug 'mxw/vim-jsx', { 'for': ['javascript', 'javascript.jsx', 'typescript'] }
+Plug 'othree/es.next.syntax.vim', { 'for': ['javascript', 'javascript.jsx', 'typescript'] }
+Plug 'othree/javascript-libraries-syntax.vim', { 'for': ['javascript', 'javascript.jsx', 'typescript'] }
+Plug 'othree/jsdoc-syntax.vim', { 'for': ['javascript', 'javascript.jsx', 'typescript'] }
+Plug 'othree/jspc.vim', { 'for': ['javascript', 'javascript.jsx', 'typescript'] }
+Plug 'othree/yajs.vim', { 'for': ['javascript', 'javascript.jsx', 'typescript'] }
 Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
-" Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 Plug 'rodjek/vim-puppet'
 Plug 'romainl/vim-qf'
-" Plug 'roxma/LanguageServer-php-neovim',  {'do': 'composer install && composer run-script parse-stubs'}
-" Plug 'roxma/nvim-cm-tern',  {'do': 'yarn install'}
-" Plug 'roxma/nvim-ascript'
-" Plug 'roxma/python-support.nvim'
 Plug 'roxma/ncm-rct-complete'
 Plug 'ncm2/ncm2'
 Plug 'roxma/nvim-yarp'
@@ -70,6 +66,7 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-ruby/vim-ruby'
 Plug 'vim-scripts/paredit.vim'
+
 
 Plug 'ryanoasis/vim-devicons'
 
@@ -321,6 +318,12 @@ set exrc
 
 " Required for operations modifying multiple buffers like rename.
 set hidden
+
+augroup SyntaxSettings
+  autocmd!
+  autocmd BufNewFile,BufRead *.tsx set filetype=typescript
+augroup END
+
 
 " let g:LanguageClient_serverCommands = {
 "     \ 'rust': ['rustup', 'run', 'nightly', 'rls'],
