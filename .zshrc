@@ -37,3 +37,4 @@ eval "$(nodenv init -)"
 eval "$(pyenv init -)"
 
 export PATH="./node_modules/.bin:$PATH"
+export PATH="/usr/local/sbin:$PATH"
