@@ -12,7 +12,7 @@ CFLAGS='-O2'
 # time that oh-my-zsh is loaded.
 ZSH_THEME="refined"
 
-plugins=(arcanist aws brew docker emoji git git-extras iterm2 jsontools node npm osx ruby tmux vi-mode yarn)
+plugins=(z arcanist aws brew docker emoji git git-extras iterm2 jsontools node npm osx ruby tmux vi-mode yarn)
 
 export GOPATH=$HOME/golang
 export PATH="$GOPATH/bin:/usr/local/opt/go/libexec/bin:/usr/local/bin:/usr/local/heroku/bin:/usr/bin:/bin:/usr/sbin:/sbin:$HOME/bin:$PATH"

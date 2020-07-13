@@ -99,6 +99,7 @@ let g:ale_linters = {'jsx': ['eslint']}
 " let g:ale_fixers = ['prettier', 'eslint']
 let g:ale_fixers = {}
 let g:ale_fixers.javascript = ['eslint', 'prettier']
+let g:ale_fixers.markdown = ['prettier']
 let g:ale_fixers.typescript = ['prettier']
 let g:ale_fix_on_save = 1
 
