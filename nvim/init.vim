@@ -76,6 +76,8 @@ call plug#end()
 set splitbelow
 set completeopt+=noselect
 
+set rtp^=/usr/local/opt/fzf
+
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
@@ -102,6 +104,9 @@ let g:ale_fixers.javascript = ['eslint', 'prettier']
 let g:ale_fixers.markdown = ['prettier']
 let g:ale_fixers.typescript = ['prettier']
 let g:ale_fix_on_save = 1
+
+
+let g:ale_terraform_fmt_executable="./terraform/support/fmt"
 
 let g:jsx_ext_required = 0
 
