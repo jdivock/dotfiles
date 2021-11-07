@@ -15,6 +15,8 @@ plugins=(arcanist aws bazel brew brew-cask docker emoji fzf git git-extras histo
 export GOPATH=$HOME/golang
 export PATH="$GOPATH/bin:/usr/local/opt/go/libexec/bin:/usr/local/bin:/usr/local/heroku/bin:/usr/bin:/bin:/usr/sbin:/sbin:$HOME/bin:$PATH"
 
+
+
 if [[ -a "$HOME/.privaterc" ]]; then
   source $HOME/.privaterc
 fi
@@ -34,7 +36,11 @@ fi
 
 eval "$(rbenv init -)"
 eval "$(nodenv init -)"
-eval "$(pyenv init -)"
+
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init --path)"
+
 
 export PATH="./node_modules/.bin:$PATH"
 export PATH="/usr/local/sbin:$PATH"
