@@ -7,7 +7,7 @@ endfunction
 
 Plug 'AndrewRadev/vim-eco'
 Plug 'airblade/vim-gitgutter'
-Plug 'ajh17/Spacegray.vim'
+Plug 'ackyshake/Spacegray.vim'
 Plug 'ap/vim-css-color'
 Plug 'blueyed/smarty.vim'
 Plug 'cakebaker/scss-syntax.vim', { 'for': 'scss' }
@@ -17,7 +17,7 @@ Plug 'derekwyatt/vim-scala', {'for': 'scala' }
 Plug 'editorconfig/editorconfig-vim'
 Plug 'elzr/vim-json', { 'for': 'json' }
 Plug 'fatih/vim-go'
-Plug 'flazz/vim-colorschemes'
+" Plug 'flazz/vim-colorschemes'
 Plug 'fsharp/vim-fsharp', {'for': 'fsharp', 'do':  'make fsautocomplete'}
 Plug 'groenewege/vim-less', { 'for': 'less' }
 Plug 'isRuslan/vim-es6'
@@ -75,6 +75,11 @@ call plug#end()
 
 set splitbelow
 set completeopt+=noselect
+set termguicolors
+
+let g:spacegray_low_contrast = 0
+let g:spacegray_use_italics = 1
+
 
 set rtp^=/usr/local/opt/fzf
 
@@ -86,23 +91,49 @@ let g:github_enterprise_urls = ['https://git.corp.stripe.com']
 augroup FiletypeGroup
     autocmd!
     au BufNewFile,BufRead *.jsx set filetype=javascript.jsx
+    au BufNewFile,BufRead *.tsx set filetype=javascript.jsx
 augroup END
 
 " let g:prettier#autoformat = 0
 " autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.less,*.scss,*.json,*.graphql,*.md,*.vue PrettierAsync
 
-" let g:ale_ruby_rubocop_executable = 'bundle'
-" let g:ale_fixers = {
-" \  'javascript': ['eslint'],
-" \}
+let g:ale_pattern_options_enabled = 1
+
+let g:ale_pattern_options = {
+  \ 'pay-server/.*\.rb$': { 'ale_ruby_rubocop_executable': 'scripts/bin/rubocop-daemon/rubocop' },
+  \ 'pos-js-v1/.*\.ts(x)$': { 'ale_javascript_eslint_executable': '../../node_modules/.bin/eslint' },
+\}
 " Fix files with prettier, and then ESLint.
-let g:ale_linter_aliases = {'jsx': ['css', 'javascript', 'javascript.jsx']}
-let g:ale_linters = {'jsx': ['eslint']}
-" let g:ale_fixers = ['prettier', 'eslint']
+let g:ale_linter_aliases = {'jsx': ['css', 'javascript', 'javascript.jsx'], 'tsx': ['javascript', 'javascript.jsx']}
+let g:ale_linters = {'jsx': ['eslint'], 'tsx': ['eslint']}
+
+" let g:ale_linters_ignore = {
+" \   'ruby': ['sorbet'],
+" \}
+
+
+call ale#linter#Define('ruby', {
+\   'name': 'sorbet-payserver',
+\   'lsp': 'stdio',
+\   'executable': 'true',
+\   'command': 'pay exec scripts/bin/typecheck --lsp',
+\   'language': 'ruby',
+\   'project_root': $HOME . '/stripe/pay-server',
+\})
+
+if !exists("g:ale_linters")
+    let g:ale_linters = {}
+endif
+
+if fnamemodify(getcwd(), ':p') =~ $HOME.'/stripe/pay-server'
+  let g:ale_linters['ruby'] = ['sorbet-payserver', 'rubocop']
+end
+
 let g:ale_fixers = {}
 let g:ale_fixers.javascript = ['eslint', 'prettier']
 let g:ale_fixers.markdown = ['prettier']
 let g:ale_fixers.typescript = ['prettier']
+let g:ale_fixers.json = ['prettier']
 let g:ale_fix_on_save = 1
 
 
@@ -229,6 +260,9 @@ nmap <C-n> :NERDTreeToggle<CR>
 " FZF
 nmap <C-p> :GitFiles<CR>
 nmap <leader>n :Buffers<CR>
+
+" Bind <leader>d to go-to-definition.
+noremap <leader>d :ALEGoToDefinition<CR>
 
 function! s:build_quickfix_list(lines)
   call setqflist(map(copy(a:lines), '{ "filename": v:val }'))

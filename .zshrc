@@ -1,8 +1,14 @@
 
+
+autoload -Uz compinit; compinit
+autoload -Uz bashcompinit; bashcompinit
+source ~/.bash_profile
+eval "$(nodenv init -)"
+compdef _git stripe-git=git # this line specifically will fix git autocompletion
+
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
 
-setopt rmstarsilent
 
 CFLAGS='-O2'
 
@@ -11,8 +17,9 @@ CFLAGS='-O2'
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
 ZSH_THEME="refined"
+# ZSH_THEME="zhann"
 
-plugins=(z arcanist aws brew docker emoji git git-extras iterm2 jsontools node npm osx ruby tmux vi-mode yarn)
+plugins=(aws brew docker emoji fzf git git-extras history history-substring-search iterm2 jsontools node npm osx ripgrep ruby ssh-agent terraform tmux tmuxinator yarn)
 
 export GOPATH=$HOME/golang
 export PATH="$GOPATH/bin:/usr/local/opt/go/libexec/bin:/usr/local/bin:/usr/local/heroku/bin:/usr/bin:/bin:/usr/sbin:/sbin:$HOME/bin:$PATH"
@@ -26,8 +33,6 @@ source $ZSH/oh-my-zsh.sh
 
 export EDITOR='nvim';
 alias vim='nvim';
-
-alias fixaudio=ps aux | grep 'coreaudio[d]' | awk '{print $2}' | xargs sudo kill
 
 if [[ -a "$HOME/.bin/tmuxinator.zsh" ]]; then
   source $HOME/.bin/tmuxinator.zsh
