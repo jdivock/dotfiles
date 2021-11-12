@@ -99,6 +99,7 @@ let g:ale_linters = {'jsx': ['eslint']}
 " let g:ale_fixers = ['prettier', 'eslint']
 let g:ale_fixers = {}
 let g:ale_fixers.javascript = ['eslint', 'prettier']
+let g:ale_fixers.typescript = ['prettier']
 let g:ale_fix_on_save = 1
 
 let g:jsx_ext_required = 0
@@ -297,6 +298,8 @@ function! TrimWhiteSpace()
   %s/\s\+$//e
 endfunction
 
+autocmd BufNewFile,BufRead *.sky set syntax=go
+
 autocmd FileWritePre    * :call TrimWhiteSpace()
 autocmd FileAppendPre   * :call TrimWhiteSpace()
 autocmd FilterWritePre  * :call TrimWhiteSpace()
@@ -323,7 +326,6 @@ augroup SyntaxSettings
   autocmd!
   autocmd BufNewFile,BufRead *.tsx set filetype=typescript
 augroup END
-
 
 " let g:LanguageClient_serverCommands = {
 "     \ 'rust': ['rustup', 'run', 'nightly', 'rls'],

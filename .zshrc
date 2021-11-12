@@ -2,6 +2,8 @@
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
 
+setopt rmstarsilent
+
 CFLAGS='-O2'
 
 # Set name of the theme to load.
@@ -10,11 +12,10 @@ CFLAGS='-O2'
 # time that oh-my-zsh is loaded.
 ZSH_THEME="refined"
 
-plugins=(arcanist aws bazel brew brew-cask docker emoji fzf git git-extras history history-substring-search iterm2 jsontools node npm osx ripgrep ruby ssh-agent terraform tmux tmuxinator vi-mode yarn)
+plugins=(arcanist aws brew docker emoji git git-extras iterm2 jsontools node npm osx ruby tmux vi-mode yarn)
 
 export GOPATH=$HOME/golang
 export PATH="$GOPATH/bin:/usr/local/opt/go/libexec/bin:/usr/local/bin:/usr/local/heroku/bin:/usr/bin:/bin:/usr/sbin:/sbin:$HOME/bin:$PATH"
-
 
 
 if [[ -a "$HOME/.privaterc" ]]; then
