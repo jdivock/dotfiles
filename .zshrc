@@ -19,7 +19,7 @@ CFLAGS='-O2'
 ZSH_THEME="refined"
 # ZSH_THEME="zhann"
 
-plugins=(aws brew docker emoji fzf git git-extras history history-substring-search iterm2 jsontools node npm osx ripgrep ruby ssh-agent terraform tmux tmuxinator yarn)
+plugins=(aws brew docker emoji fzf git git-extras history history-substring-search iterm2 jsontools node npm macos ripgrep ruby ssh-agent terraform tmux tmuxinator yarn)
 
 export GOPATH=$HOME/golang
 export PATH="$GOPATH/bin:/usr/local/opt/go/libexec/bin:/usr/local/bin:/usr/local/heroku/bin:/usr/bin:/bin:/usr/sbin:/sbin:$HOME/bin:$PATH"
