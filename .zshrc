@@ -40,7 +40,6 @@ fi
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-eval "$(rbenv init -)"
 eval "$(nodenv init -)"
 
 export PYENV_ROOT="$HOME/.pyenv"

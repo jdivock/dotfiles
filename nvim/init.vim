@@ -101,7 +101,6 @@ let g:ale_pattern_options_enabled = 1
 
 let g:ale_pattern_options = {
   \ 'pay-server/.*\.rb$': { 'ale_ruby_rubocop_executable': 'scripts/bin/rubocop-daemon/rubocop' },
-  \ 'pos-js-v1/.*\.ts(x)$': { 'ale_javascript_eslint_executable': '../../node_modules/.bin/eslint' },
 \}
 " Fix files with prettier, and then ESLint.
 let g:ale_linter_aliases = {'jsx': ['css', 'javascript', 'javascript.jsx'], 'tsx': ['javascript', 'javascript.jsx']}
@@ -131,7 +130,7 @@ end
 
 let g:ale_fixers = {}
 let g:ale_fixers.javascript = ['eslint', 'prettier']
-let g:ale_fixers.markdown = ['prettier']
+" let g:ale_fixers.markdown = ['prettier']
 let g:ale_fixers.typescript = ['prettier']
 let g:ale_fixers.json = ['prettier']
 let g:ale_fix_on_save = 1
