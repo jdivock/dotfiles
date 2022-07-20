@@ -64,6 +64,7 @@ Plug 'tpope/vim-rhubarb'
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-vinegar'
+Plug 'udalov/kotlin-vim'
 Plug 'w0rp/ale'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -97,21 +98,6 @@ augroup FiletypeGroup
     au BufNewFile,BufRead *.tsx set filetype=javascript.jsx
 augroup END
 
-" let g:prettier#autoformat = 0
-" autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.less,*.scss,*.json,*.graphql,*.md,*.vue PrettierAsync
-
-let g:ale_pattern_options_enabled = 1
-
-let g:ale_pattern_options = {
-  \ 'pay-server/.*\.rb$': { 'ale_ruby_rubocop_executable': 'scripts/bin/rubocop-daemon/rubocop' },
-\}
-" Fix files with prettier, and then ESLint.
-let g:ale_linter_aliases = {'jsx': ['css', 'javascript', 'javascript.jsx'], 'tsx': ['javascript', 'javascript.jsx']}
-let g:ale_linters = {'jsx': ['eslint'], 'tsx': ['eslint']}
-
-" let g:ale_linters_ignore = {
-" \   'ruby': ['sorbet'],
-" \}
 
 
 call ale#linter#Define('ruby', {
@@ -131,10 +117,20 @@ if fnamemodify(getcwd(), ':p') =~ $HOME.'/stripe/pay-server'
   let g:ale_linters['ruby'] = ['sorbet-payserver', 'rubocop']
 end
 
+let g:ale_pattern_options_enabled = 1
+
+let g:ale_pattern_options = {
+  \ 'pay-server/.*\.rb$': { 'ale_ruby_rubocop_executable': 'scripts/bin/rubocop-daemon/rubocop' },
+\}
+
+" Fix files with prettier, and then ESLint.
+let g:ale_linter_aliases = {'jsx': ['css', 'javascript', 'javascript.jsx'], 'tsx': ['javascript', 'javascript.jsx']}
+let g:ale_linters = {'jsx': ['eslint'], 'tsx': ['eslint']}
+
 let g:ale_fixers = {}
 let g:ale_fixers.javascript = ['eslint', 'prettier']
 " let g:ale_fixers.markdown = ['prettier']
-let g:ale_fixers.typescript = ['prettier']
+let g:ale_fixers.typescript = ['prettier', 'tslint']
 let g:ale_fixers.json = ['prettier']
 let g:ale_fix_on_save = 1
 
@@ -142,9 +138,6 @@ let g:ale_fix_on_save = 1
 let g:ale_terraform_fmt_executable="./terraform/support/fmt"
 
 let g:jsx_ext_required = 0
-
-" othree/javascript-libraries-syntax
-" let g:used_javascript_libs = 'underscore,backbone,react,jquery'
 
 " Stupid mac
 if has('nvim')
@@ -356,8 +349,6 @@ au BufRead,BufNewFile .jshintrc setfiletype json
 au BufRead,BufNewFile .babelrc setfiletype json
 au BufRead,BufNewFile .eslintrc setfiletype yaml
 
-" au BufWritePost * redraw!
-
 set secure
 set exrc
 
@@ -368,17 +359,3 @@ augroup SyntaxSettings
   autocmd!
   autocmd BufNewFile,BufRead *.tsx set filetype=typescript
 augroup END
-
-" let g:LanguageClient_serverCommands = {
-"     \ 'rust': ['rustup', 'run', 'nightly', 'rls'],
-"     \ 'javascript': ['flow', 'lsp', '--from', './node_modules/.bin'],
-"     \ 'javascript.jsx': ['flow', 'lsp', '--from', './node_modules/.bin'],
-"     \ }
-"
-" let g:LanguageClient_autoStart = 1
-
-" nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
-" nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
-"
-" let g:LanguageClient_rootMarkers = ['.flowconfig']
-"

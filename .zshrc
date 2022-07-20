@@ -1,9 +1,6 @@
-
-
 autoload -Uz compinit; compinit
 autoload -Uz bashcompinit; bashcompinit
 source ~/.bash_profile
-eval "$(nodenv init -)"
 compdef _git stripe-git=git # this line specifically will fix git autocompletion
 
 # Path to your oh-my-zsh installation.
