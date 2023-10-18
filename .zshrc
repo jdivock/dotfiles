@@ -15,7 +15,7 @@ CFLAGS='-O2'
 # time that oh-my-zsh is loaded.
 ZSH_THEME="refined"
 
-plugins=(aws brew docker emoji fzf git git-extras history history-substring-search iterm2 jsontools node npm macos ripgrep ruby ssh-agent terraform tmux tmuxinator yarn)
+plugins=(arcanist aws brew brew-cask docker emoji git git-extras iterm2 jsontools node npm osx ruby ubuntu tmux vi-mode yarn)
 
 export GOPATH=$HOME/golang
 export PYENV_ROOT="$HOME/.pyenv"
